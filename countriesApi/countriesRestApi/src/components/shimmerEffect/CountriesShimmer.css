@@ -1,0 +1,9 @@
+.shimmer-card {
+  height: 350px;
+  background-color: rgb(157, 157, 157);
+}
+.shimmer-card-detail {
+  height: 150px;
+  width: 500px;
+  background-color: rgb(157, 157, 157);
+}

@@ -1,0 +1,23 @@
+.header-container {
+  padding-inline: 24px;
+  background-color: var(--elements-color);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.title {
+  font-weight: 800;
+}
+
+.theme-changer {
+  cursor: pointer;
+}
+.theme-changer > i {
+  margin-right: 10px;
+}
