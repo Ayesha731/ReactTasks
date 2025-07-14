@@ -1,5 +1,5 @@
 import React from "react";
-import "./status.css";
+import "./Status.css";
 import ReactConfetti from "react-confetti";
 import { clsx } from "clsx";
 import { getFarewellText } from "../header/utils";
