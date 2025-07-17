@@ -1,6 +1,7 @@
 import React from "react";
-import image from "../../assets/download.png";
+import image from "../../assets/downloadd.png";
 import "./Countries.css";
+import { NavLink } from "react-router-dom";
 const NoResult = ({ message, isSearch }) => {
   return (
     <div className="no-result-container">
@@ -18,6 +19,9 @@ const NoResult = ({ message, isSearch }) => {
         <li>Try more general keywords.</li>
       </ul>
       <img src={image} alt="image not found" />
+      {/* <NavLink to="/" className="btn-home">
+        Go Back to HomePage
+      </NavLink> */}
     </div>
   );
 };

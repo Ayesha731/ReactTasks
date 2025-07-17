@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Countries.css";
 import CountryCard from "./CountryCard";
 // import axios from "axios";
@@ -6,7 +6,7 @@ import axiosInstance from "../../utils/axios";
 import CountriesShimmer from "../shimmerEffect/CountriesShimmer";
 import NoResult from "./NoResult";
 import Error from "../error/Error";
-
+import { FetchApi } from "../../contexts/FetchContext";
 // import data from "../../data.js";
 
 const BASE_URL = "https://restcountries.com/v3.1";
@@ -14,6 +14,8 @@ const Countries = ({ search, dropSearch }) => {
   const [countriesData, setCountriesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+
+  const fetchData = useContext(FetchApi);
 
   useEffect(() => {
     // method----1*********************

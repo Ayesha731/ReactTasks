@@ -42,3 +42,14 @@
   height: 150px;
   object-fit: cover;
 }
+NavLink .btn-home {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid white;
+  background-color: rgb(32, 3, 107);
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+}
