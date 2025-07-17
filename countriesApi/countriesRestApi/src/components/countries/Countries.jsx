@@ -4,6 +4,8 @@ import CountryCard from "./CountryCard";
 // import axios from "axios";
 import axiosInstance from "../../utils/axios";
 import CountriesShimmer from "../shimmerEffect/CountriesShimmer";
+import NoResult from "./NoResult";
+import Error from "../error/Error";
 
 // import data from "../../data.js";
 
@@ -58,12 +60,9 @@ const Countries = ({ search, dropSearch }) => {
   // );
   // console.log(filterCountry);
 
-  // const filteredCountries = countriesData.filter((country) =>
-  //   country.name.common.toLowerCase().includes(search.toLowerCase())
-  // );
-
   const filteredCountries = countriesData.filter((country) => {
     const matchName = country.name.common
+      .trim()
       .toLowerCase()
       .includes(search.toLowerCase());
 
@@ -79,7 +78,7 @@ const Countries = ({ search, dropSearch }) => {
   // }
 
   if (error) {
-    return <div>Something went wrong....please try again</div>;
+    return <Error />;
   }
   return (
     <main>
@@ -87,19 +86,25 @@ const Countries = ({ search, dropSearch }) => {
         <CountriesShimmer />
       ) : (
         <div className="countries-container">
-          {filteredCountries.map((country) => {
-            console.log(country);
-            return (
-              <CountryCard
-                key={country.name.common}
-                name={country.name.common}
-                flag={country.flags.svg}
-                population={country.population}
-                region={country.region}
-                capital={country.capital?.[0] || "N/A"}
-              />
-            );
-          })}
+          {filteredCountries.length > 0 ? (
+            <div className="countries-container">
+              {filteredCountries.map((country) => (
+                <CountryCard
+                  key={country.name.common}
+                  name={country.name.common}
+                  flag={country.flags.svg}
+                  population={country.population}
+                  region={country.region}
+                  capital={country.capital?.[0] || "N/A"}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoResult
+              message="No country found for your search!"
+              isSearch={search}
+            />
+          )}
         </div>
       )}
     </main>

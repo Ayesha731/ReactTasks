@@ -7,7 +7,7 @@ const SearchBar = ({ setSearch }) => {
       <input
         type="text"
         placeholder="Search for a country..."
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        onChange={(e) => setSearch(e.target.value.trim().toLowerCase())}
       />
     </div>
   );

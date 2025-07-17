@@ -1,13 +1,37 @@
 import React from "react";
 import { useRouteError } from "react-router-dom";
-
-const Error = () => {
-  const error = useRouteError();
+import "./Error.css";
+import image from "../../assets/download.png";
+import { NavLink } from "react-router-dom";
+const Error = ({ message }) => {
+  const error1 = useRouteError();
   return (
-    <div>
-      <h1>Something went wrong.....please try again</h1>
-      <p>Error:{error.status}</p>
-    </div>
+    <>
+      <div className="error-container">
+        <figure>
+          <img
+            src={image}
+            alt="image not found"
+            width={"300px"}
+            height={"200px"}
+          />
+        </figure>
+        <div className="text-conatiner1">
+          <h2>
+            <i class="fa-brands fa-searchengin"></i>
+            Something Went Wrong
+          </h2>
+          <h4>Suggestions:</h4>
+          <ul>
+            <li> Please Try Again</li>
+            <li>Check your page you were looking for</li>
+          </ul>
+        </div>
+        <NavLink to="/" className="btn-home">
+          Go Back to HomePage
+        </NavLink>
+      </div>
+    </>
   );
 };
 

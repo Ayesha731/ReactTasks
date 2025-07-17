@@ -3,8 +3,9 @@ import "./CountryDetail.css";
 import axios from "axios";
 import axiosInstance from "../../utils/axios";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import CountryDetailShimmer from "../shimmerEffect/CountryDetailShimmer";
+import Error from "../error/Error";
 
 const CountryDetail = () => {
   const params = useParams();
@@ -12,10 +13,13 @@ const CountryDetail = () => {
   const countryName = params.country;
   //   const countryName = searchParams.get("name");
   //   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [countryData, setCountryData] = useState({});
+
+  const navigate = useNavigate();
+
   const BASE_URL = "https://restcountries.com/v3.1";
   console.log(countryData?.borders);
   useEffect(() => {
@@ -101,17 +105,21 @@ const CountryDetail = () => {
   }, [countryName]);
 
   if (error) {
-    return <div>Something went wrong....please try again</div>;
+    return <Error message={`Something went wrong.....please try again😩`} />;
   }
   if (loading) {
     return <CountryDetailShimmer />;
   }
+
+  const handleBackArrow = () => {
+    navigate("/");
+  };
   return countryData === null ? (
     <>console.log("Loading....")</>
   ) : (
     <main>
       <div className="country-details-container">
-        <span className="back-button" onClick={() => history.back()}>
+        <span className="back-button" onClick={handleBackArrow}>
           <i className="fa-solid fa-arrow-left"></i>
           &nbsp; Back
         </span>
