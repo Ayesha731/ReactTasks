@@ -1,7 +1,7 @@
 import React from "react";
 import image from "../../assets/downloadd.png";
 import "./Countries.css";
-import { NavLink } from "react-router-dom";
+
 const NoResult = ({ message, isSearch }) => {
   return (
     <div className="no-result-container">
@@ -9,9 +9,11 @@ const NoResult = ({ message, isSearch }) => {
         <i class="fa-brands fa-searchengin"></i>
         &nbsp;{message}
       </h2>
-      <p>
-        Your search - <b>{isSearch} </b> - did not match any countries.
-      </p>
+      {isSearch && (
+        <p>
+          No results found for "<strong>{isSearch}</strong>"
+        </p>
+      )}
       <h3>Suggestions:</h3>
       <ul>
         <li>Make sure that all words are spelled correctly.</li>
@@ -19,9 +21,6 @@ const NoResult = ({ message, isSearch }) => {
         <li>Try more general keywords.</li>
       </ul>
       <img src={image} alt="image not found" />
-      {/* <NavLink to="/" className="btn-home">
-        Go Back to HomePage
-      </NavLink> */}
     </div>
   );
 };

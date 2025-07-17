@@ -11,51 +11,51 @@ import { FetchApi } from "../../contexts/FetchContext";
 
 const BASE_URL = "https://restcountries.com/v3.1";
 const Countries = ({ search, dropSearch }) => {
-  const [countriesData, setCountriesData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  // const [countriesData, setCountriesData] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState();
 
-  const fetchData = useContext(FetchApi);
+  const { countriesData, isLoading, error } = useContext(FetchApi);
 
-  useEffect(() => {
-    // method----1*********************
-    const fetchCountriesData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `${BASE_URL}/all?fields=name,flags,population,region,capital`
-        );
-        const data = await response.json();
-        setCountriesData(data);
-      } catch (error) {
-        console.log("Error");
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCountriesData();
+  // useEffect(() => {
+  //   // method----1*********************
+  //   const fetchCountriesData = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const response = await fetch(
+  //         `${BASE_URL}/all?fields=name,flags,population,region,capital`
+  //       );
+  //       const data = await response.json();
+  //       setCountriesData(data);
+  //     } catch (error) {
+  //       console.log("Error");
+  //       setError(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchCountriesData();
 
-    // method----2 ************************
-    // axiosInstance
-    //   .get("/all?fields=name,flags,population,region,capital")
-    //   .then((response) => {
-    //     if (Array.isArray(response.data)) {
-    //       setCountriesData(response.data);
-    //     } else {
-    //       setError("Unexpected data format received.");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Axios fetch error:", error.message);
-    //     setError("Failed to load countries.");
-    //   });
+  //   // method----2 ************************
+  //   // axiosInstance
+  //   //   .get("/all?fields=name,flags,population,region,capital")
+  //   //   .then((response) => {
+  //   //     if (Array.isArray(response.data)) {
+  //   //       setCountriesData(response.data);
+  //   //     } else {
+  //   //       setError("Unexpected data format received.");
+  //   //     }
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.error("Axios fetch error:", error.message);
+  //   //     setError("Failed to load countries.");
+  //   //   });
 
-    //it is used for unmount--->mean the component is remove from the page
-    return () => {
-      console.log("cleaning up...");
-    };
-  }, []);
+  //   //it is used for unmount--->mean the component is remove from the page
+  //   return () => {
+  //     console.log("cleaning up...");
+  //   };
+  // }, []);
 
   // const filterCountry = data.filter((country) =>
   //   country.name.toLowerCase().includes("Pakistan")
@@ -75,9 +75,9 @@ const Countries = ({ search, dropSearch }) => {
     return matchName && matchRegion;
   });
 
-  // if (isLoading) {
-  //   return <div>Loading....</div>;
-  // }
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
 
   if (error) {
     return <Error />;

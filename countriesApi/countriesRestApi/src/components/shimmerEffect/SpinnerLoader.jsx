@@ -2,8 +2,8 @@ import React from 'react'
 
 const SpinnerLoader = () => {
   return (
-    <div>
-      
+    <div className='loader-section loader-container'>
+      <div className="loader"></div>
     </div>
   )
 }

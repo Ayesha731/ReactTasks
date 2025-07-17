@@ -1,6 +1,6 @@
 import React from "react";
 import { createContext } from "react";
-
+import { useEffect, useState } from "react";
 export const FetchApi = createContext();
 
 const FetchContext = ({ children }) => {
@@ -49,7 +49,7 @@ const FetchContext = ({ children }) => {
   }, []);
 
   return (
-    <FetchApi.Provider value={{ fetchCountriesData }}>
+    <FetchApi.Provider value={{ countriesData, isLoading, error }}>
       {children}
     </FetchApi.Provider>
   );

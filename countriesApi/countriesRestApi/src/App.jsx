@@ -1,15 +1,17 @@
 import { useState } from "react";
 import Header from "./components/header/Header";
-import { Outlet } from "react-router-dom";
-import { FetchApi } from "./contexts/FetchContext";
+import { Outlet, useNavigation } from "react-router-dom";
+import FetchContext from "./contexts/FetchContext";
 
 function App() {
+  const navigation = useNavigation();
+  if (navigation.state === "loading") return <h1>Loading....</h1>;
   return (
     <>
-      <FetchApi>
+      <FetchContext>
         <Header />
         <Outlet />
-      </FetchApi>
+      </FetchContext>
     </>
   );
 }
