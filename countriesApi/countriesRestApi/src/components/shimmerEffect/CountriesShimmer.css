@@ -7,3 +7,49 @@
   width: 500px;
   background-color: rgb(157, 157, 157);
 }
+.loader-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 48px;
+  position: relative;
+  margin-top: 300px;
+  animation: split 1s ease-in infinite alternate;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  transform: translateX(-10px);
+  background: rgb(7, 7, 134);
+  opacity: 0.75;
+  backdrop-filter: blur(20px);
+}
+
+.loader::after {
+  left: auto;
+  right: 0;
+  background: #fff;
+  transform: translateX(10px);
+}
+
+@keyframes split {
+  0%,
+  25% {
+    width: 64px;
+  }
+  100% {
+    width: 148px;
+  }
+}

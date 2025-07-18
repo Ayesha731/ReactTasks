@@ -7,6 +7,7 @@ import CountriesShimmer from "../shimmerEffect/CountriesShimmer";
 import NoResult from "./NoResult";
 import Error from "../error/Error";
 import { FetchApi } from "../../contexts/FetchContext";
+import SpinnerLoader from "../shimmerEffect/SpinnerLoader";
 // import data from "../../data.js";
 
 const BASE_URL = "https://restcountries.com/v3.1";
@@ -76,7 +77,7 @@ const Countries = ({ search, dropSearch }) => {
   });
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <SpinnerLoader />;
   }
 
   if (error) {

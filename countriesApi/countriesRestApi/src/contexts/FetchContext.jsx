@@ -7,6 +7,7 @@ const FetchContext = ({ children }) => {
   const [countriesData, setCountriesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+
   const BASE_URL = "https://restcountries.com/v3.1";
   useEffect(() => {
     // method----1*********************

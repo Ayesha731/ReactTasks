@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import FetchCountryData from "./contexts/FetchCountryData";
 import Home from "./components/home/Home.jsx";
 import Error from "./components/error/Error.jsx";
 import CountryDetail from "./components/countryDetail/CountryDetail.jsx";
@@ -24,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/:country",
-        element: <CountryDetail />,
+        element: (
+          <FetchCountryData>
+            <CountryDetail />,
+          </FetchCountryData>
+        ),
       },
     ],
   },

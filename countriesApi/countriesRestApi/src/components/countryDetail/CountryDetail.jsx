@@ -6,6 +6,8 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import CountryDetailShimmer from "../shimmerEffect/CountryDetailShimmer";
 import Error from "../error/Error";
+import { FetchApi } from "../../contexts/FetchContext";
+import SpinnerLoader from "../shimmerEffect/SpinnerLoader";
 
 const CountryDetail = () => {
   const params = useParams();
