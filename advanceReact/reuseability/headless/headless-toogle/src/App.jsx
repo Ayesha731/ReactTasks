@@ -3,29 +3,44 @@ import Menu from "./components/Menu";
 import Toggle from "./components/Toggle";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import Star from "./components/Toggle/Star";
-
+import Main from "./components/refHook/Main";
+import Ref from "./components/refHook/Ref";
+import RenderProp from "./components/renderProp/RenderProp";
+import ToggleDisplay from "./components/Toggle/ToggleDisplay";
 function App() {
   const sports = ["Tennis", "Pickleball", "Racquetball", "Squash"];
   return (
     <>
       <h1>App</h1>
-      {/* <Toggle>
+
+      <Toggle>
         <Toggle.Button>
-          <Toggle.On>
+          {/* <Toggle.On>
             <BsStarFill className="star filled" />
+            <div className="box filled"></div>
           </Toggle.On>
           <Toggle.Off>
             <BsStar className="star" />
-          </Toggle.Off>
+            <div className="box"></div>
+          </Toggle.Off> */}
+          <Toggle.Display>
+            {(on) => {
+              return <div className={`box ${on ? "filled" : ""}`}></div>;
+            }}
+          </Toggle.Display>
         </Toggle.Button>
-      </Toggle> */}
+      </Toggle>
 
       <Star onChange={() => console.log("Star was clicked!!")} />
 
       <br />
       <hr />
-      <br />
-      <Menu>
+      {/* <br />
+      <Menu
+        onOpen={() => {
+          console.log("Menu toggleddd... ");
+        }}
+      >
         <Menu.Button>Sports</Menu.Button>
         <Menu.Dropdown>
           {sports.map((sport) => (
@@ -36,10 +51,10 @@ function App() {
 
       <br />
       <br />
-      <hr />
+      <hr /> */}
       <Menu
         onOpen={() => {
-          console.log("Menu Toggled... ");
+          console.log("Menu open... ");
         }}
       >
         <Menu.Button>Menu</Menu.Button>
@@ -50,6 +65,7 @@ function App() {
           <Menu.Item>Blog</Menu.Item>
         </Menu.Dropdown>
       </Menu>
+
       {/* <Toggle>
         <Menu>
           <Toggle.Button>
@@ -65,6 +81,10 @@ function App() {
           </Toggle.On>
         </Menu>
       </Toggle> */}
+
+      {/* <Main /> */}
+      {/* <Ref /> */}
+      {/* <RenderProp /> */}
     </>
   );
 }
