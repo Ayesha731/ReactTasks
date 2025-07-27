@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 import { MenuContext } from "./Menu";
 
-const MenuDropdown = ({ children, open, toggle }) => {
-  const open1 = useContext(MenuContext);
-  return open1 ? (
-    <div className="menu-dropdown">
+const MenuDropdown = ({ children }) => {
+  const { open, menuId } = useContext(MenuContext);
+  return open ? (
+    <div className="menu-dropdown" aria-hidden={!open} id={menuId}>
       {/* {items.map((item) => (
         <div className="menu-item" key={item}>
           {item}
         </div>
       ))} */}
 
-      {/* {children} */}
+      {children}
 
-      {React.Children.map(children, (child) => {
+      {/* {React.Children.map(children, (child) => {
         return React.cloneElement(child, { toggle, open });
-      })}
+      })} */}
     </div>
   ) : null;
 };

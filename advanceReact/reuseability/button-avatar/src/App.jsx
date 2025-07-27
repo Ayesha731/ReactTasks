@@ -4,16 +4,14 @@ import { FcGoogle } from "react-icons/fc";
 import Marquee from "../src/components/buttonTask/Marquee";
 import Avatar from "./components/avatar/Avatar";
 import avatar from "./assets/avatar.jpeg";
-import MenuButton from "./components/menuButton/MenuButton";
-import Menu from "./components/menuButton/Menu";
-import MenuDropdown from "./components/menuButton/MenuDropdown";
+
+import Menu from "./components/menuButton/index";
+
 import { Children, useState } from "react";
-import MenuItem from "./components/menuButton/MenuItem";
+
 import Context from "./components/context/Context";
 
 function App() {
- 
-
   const handleButton = () => {
     console.log("Single Click...");
   };
@@ -89,18 +87,18 @@ function App() {
         items={["Tennis", "Racquetball", "Pickleball", "Squash"]}
       /> */}
 
-      {/* <Menu>
-        <MenuButton buttonText="Sports" />
-        <MenuButton>{"Sports"}</MenuButton>
-        <MenuDr opdown items={sports} />
-        <MenuDropdown>
+      <Menu>
+        {/* <MenuButton buttonText="Sports" /> */}
+        <Menu.Button>{"Sports"}</Menu.Button>
+        {/* <MenuDropdown opdown items={sports} /> */}
+        <Menu.Dropdown>
           {sports.map((sport) => (
-            <MenuItem key={sport}>
+            <Menu.Item key={sport}>
               <a href="#"> {sport}</a>
-            </MenuItem>
+            </Menu.Item>
           ))}
-        </MenuDropdown>
-      </Menu> */}
+        </Menu.Dropdown>
+      </Menu>
 
       <Context />
     </>

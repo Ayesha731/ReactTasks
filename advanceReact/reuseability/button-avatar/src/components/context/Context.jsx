@@ -13,8 +13,8 @@ const Context = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   }
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className="container dark-theme">
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={`container ${theme}-theme`}>
         {/* <h1>Context Api</h1> */}
         <Header />
         <ButtonContext />
