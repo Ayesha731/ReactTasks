@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
 import Home from "./components/home/Home.jsx";
+import MyApp from "./Layout.jsx";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <nav>
           <Link to="/">Home</Link>
           <Link to={"/about"}>About</Link>
@@ -18,7 +19,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <MyApp />
     </>
   );
 }
