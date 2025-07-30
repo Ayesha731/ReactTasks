@@ -1,0 +1,15 @@
+.welcome-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  text-align: left;
+  color: var(--black-text-color);
+  text-transform: uppercase;
+}
+.button-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

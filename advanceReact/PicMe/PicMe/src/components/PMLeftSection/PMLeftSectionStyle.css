@@ -1,0 +1,33 @@
+.left-section {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--white-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 29px;
+  left: 29px;
+}
+
+.logo img {
+  width: 68.4px;
+  height: 74.81px;
+}
+
+.left-section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  gap: 20px;
+  /* width: 361px; */
+  width: 45%;
+  margin: auto;
+}
