@@ -17,8 +17,7 @@
   --green: green;
 }
 
-.auth-screen,
-.location-screen {
+.auth-screen {
   display: flex;
   width: 100%;
   height: 100vh;
@@ -32,7 +31,6 @@
   font-weight: 500;
   font-size: 32px;
   color: var(--black-text-color);
-
   text-align: left !important;
   display: block;
   width: 100%;
@@ -42,8 +40,7 @@
   font-weight: 500;
   font-size: 32px;
   color: var(--black-text-color);
-
-  text-align: left;
+  text-align: center;
 }
 
 .para {
@@ -53,17 +50,13 @@
   color: var(--gray-200);
 }
 .para1 {
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  color: var(--gray-200);
   cursor: pointer;
 }
 .para2 {
-  font-size: 14px;
-  font-weight: 400;
   text-align: left;
-  color: var(--gray-200);
+}
+.para3 {
+  text-align: right;
 }
 .span1 {
   color: var(--primary-color);
@@ -77,8 +70,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
   width: 100%;
-  max-width: 400px;
+  max-width: 345px;
   margin: 0 auto;
+  text-align: left;
 }

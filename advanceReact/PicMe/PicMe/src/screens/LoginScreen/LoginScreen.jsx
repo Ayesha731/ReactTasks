@@ -52,8 +52,8 @@ const LoginScreen = () => {
   return (
     <div className="auth-screen">
       <PMLeftSection>
-        <h1 className="auth-text">Sign in</h1>
         <form onSubmit={handleSubmit} className="form">
+          <h1 className="auth-text">Sign in</h1>
           <PMInput
             icon={<MessageIcon />}
             placeholder="Enter your email"

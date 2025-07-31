@@ -11,8 +11,8 @@ const WelcomeScreen = () => {
         <PMLeftSection>
           <div className="welcome-screen-content">
             <h1 className="welcome-text">
-              Experience <span className="span2">Photography</span> In a new
-              Dimension
+              Experience <span className="span2">Photography</span> In a <br />
+              new Dimension!
             </h1>
             <div className="button-div">
               <PMButton varient="fill">

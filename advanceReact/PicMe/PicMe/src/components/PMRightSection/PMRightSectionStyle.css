@@ -5,9 +5,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .right-section img {
-  width: 568.5px;
-  height: 589px;
+  max-width: 568.5px;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 770px) {
+  .right-section {
+    display: none;
+  }
 }

@@ -9,7 +9,7 @@ const PasswordChangedScreen = () => {
     <div className="auth-screen">
       <PMLeftSection>
         <SuccessMarkIcon />
-        <h1 className="auth-text">Password Changed!</h1>
+        <h1 className="auth-text2">Password Changed!</h1>
         <p className="para">Your password has been changed successfully.</p>
         <PMButton varient="fill">
           <span className="btn-text">Back to Login</span>

@@ -33,11 +33,11 @@ const ForgotPasswordScreen = () => {
   return (
     <div className="auth-screen">
       <PMLeftSection>
-        <h1 className="auth-text">Forgot Password?</h1>
-        <p className="para2">
-          Please enter your email address to request a password reset
-        </p>
         <form onSubmit={handleSubmit} className="form">
+          <h1 className="auth-text">Forgot Password?</h1>
+          <p className="para para2">
+            Please enter your email address to request a password reset
+          </p>
           {/* Email Field */}
           <PMInput
             icon={<MessageIcon />}

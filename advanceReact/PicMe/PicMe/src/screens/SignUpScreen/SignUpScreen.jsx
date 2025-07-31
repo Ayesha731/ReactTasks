@@ -55,9 +55,8 @@ const SignUpScreen = () => {
   return (
     <div className="auth-screen">
       <PMLeftSection>
-        <h1 className="auth-text">Sign Up</h1>
         <form onSubmit={handleSubmit} className="form">
-          {/* Full Name */}
+          <h1 className="auth-text">Sign Up</h1>
           <PMInput
             icon={<ProfileIcon />}
             placeholder="Full name"

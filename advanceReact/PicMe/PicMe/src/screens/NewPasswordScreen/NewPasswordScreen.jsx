@@ -40,12 +40,12 @@ const NewPasswordScreen = () => {
   return (
     <div className="auth-screen">
       <PMLeftSection>
-        <h1 className="auth-text">Create New Password</h1>
-        <p className="para2">
-          Your new password must be different from previous used password
-        </p>
         {/* Form */}
         <form onSubmit={handleSubmit} className="form">
+          <h1 className="auth-text">Create New Password</h1>
+          <p className="para para2">
+            Your new password must be different from previous used password
+          </p>
           {/* Password */}
           <PMInput
             icon={<PasswordIcon />}
@@ -72,7 +72,7 @@ const NewPasswordScreen = () => {
 
           {/* Hint */}
           <div className="pass-remember-section">
-            <p className="para">Both Password Must Match</p>
+            <p className="para para3">Both Password Must Match</p>
           </div>
 
           {/* Button */}

@@ -2,10 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 345px;
+  margin: 0 auto;
 }
 .remember {
   display: flex;
-  justify-content: center;
+  align-items: center;
   font-size: 14px;
   color: var(--gray-200);
 }
@@ -58,6 +61,7 @@
 .divider {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 10px;
 }
 
@@ -74,53 +78,6 @@
 
 .divider .text {
   font-size: 14px;
-  color: #888;
-}
-
-@media (max-width: 1024px) {
-  .PMLeftSection,
-  .PMRightSection {
-    padding: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .auth-screen {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .PMLeftSection,
-  .PMRightSection {
-    flex: none;
-    width: 100%;
-    padding: 20px;
-  }
-
-  .form {
-    max-width: 100%;
-    width: 80%;
-  }
-
-  .PMRightSection img {
-    width: 100%;
-    max-height: 150px;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 480px) {
-  .auth-text {
-    font-size: 24px;
-  }
-
-  .btn-text {
-    font-size: 14px;
-  }
-
-  .para,
-  .para1,
-  .span1 {
-    font-size: 12px;
-  }
+  color: var(--gray-200);
+  white-space: nowrap;
 }

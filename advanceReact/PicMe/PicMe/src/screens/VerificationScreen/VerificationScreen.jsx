@@ -14,14 +14,15 @@ const VerificationScreen = () => {
   return (
     <div className="auth-screen">
       <PMLeftSection>
-        <h1 className="auth-text">Verification</h1>
-        <p className="para2">
-          We've send you the verification code on abc@gamil.com
-        </p>
-
-        <PMLoginOtp length={4} onChangeOTP={setOtp} />
-     
+        <div className="form">
+          <h1 className="auth-text">Verification</h1>
+          <p className="para para2">
+            We've sent you the verification code on abc@gmail.com
+          </p>
+          <PMLoginOtp length={4} onVerifyOTP={setOtp} />
+        </div>
       </PMLeftSection>
+
       <PMRightSection screen={"auth"} alt={"verification"} />
     </div>
   );

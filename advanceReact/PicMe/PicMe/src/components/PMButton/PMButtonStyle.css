@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 345px;
   min-width: 200px;
-  padding: 13px;
+  padding: 14px;
   border-radius: 15px;
   font-family: "Poppins", sans-serif;
 }
@@ -28,6 +28,7 @@ button.button-outline {
   color: var(--primary-color);
   background-color: var(--secondary-color);
   border: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 button.button-social {
   background-color: var(--secondary-color);

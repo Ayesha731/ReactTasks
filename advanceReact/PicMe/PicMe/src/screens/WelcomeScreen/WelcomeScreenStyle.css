@@ -1,3 +1,13 @@
+.welcome-screen-content {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 345px;
+  width: 100%;
+  gap: 10px;
+}
 .welcome-text {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -9,7 +19,17 @@
 .button-div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
+  width: 100%;
+}
+@media (max-width: 770px) {
+  .right-section {
+    display: none;
+  }
+  .welcome-text {
+    text-align: center;
+    font-size: 30px;
+    padding: 22px 0 10px 0;
+    line-height: 2.2rem;
+  }
 }

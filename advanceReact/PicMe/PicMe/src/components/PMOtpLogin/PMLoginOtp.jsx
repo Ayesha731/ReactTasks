@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./PMLoginOtpStyle.css";
 import PMButton from "../PMButton/PMButton";
 
-const PMLoginOtp = ({ length = 6, onVerifyOTP }) => {
+const PMLoginOtp = ({ length = 4, onVerifyOTP }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const [timer, setTimer] = useState(30);
   const inputRefs = useRef([]);

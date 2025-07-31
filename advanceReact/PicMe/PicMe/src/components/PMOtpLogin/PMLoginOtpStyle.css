@@ -2,16 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 15px;
-  max-width: 350px;
   width: 100%;
+  max-width: 345px;
+  margin: 0 auto;
 }
 
 .otp-inputs {
   display: flex;
   justify-content: space-evenly;
   gap: 10px;
-  max-width: 350px;
   width: 100%;
 }
 
@@ -50,16 +51,6 @@
 .otp-verification {
   font-size: 14px;
   color: var(--green);
-}
-
-.verify-btn {
-  width: 100%;
-  padding: 12px;
-  background: var(--primary-color);
-  color: var(--secondary-color);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .reset-timer {
