@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouteError, useNavigate } from "react-router-dom";
 import "./PMErrorStyle.css";
+import PMButton from "../PMButton/PMButton";
 
 const PMError = () => {
   const error = useRouteError();
@@ -22,12 +23,12 @@ const PMError = () => {
           {error?.statusText || error?.message || "Unexpected Error Occurred!"}
         </p>
         <div className="error-actions">
-          <button className="retry-btn" onClick={handleGoBack}>
+          <PMButton varient={"fill"} onClick={handleGoBack}>
             🔙 Go Back
-          </button>
-          <button className="home-btn" onClick={handleGoHome}>
+          </PMButton>
+          <PMButton varient={"outline"} onClick={handleGoHome}>
             🏠 Go Home
-          </button>
+          </PMButton>
         </div>
       </div>
     </div>

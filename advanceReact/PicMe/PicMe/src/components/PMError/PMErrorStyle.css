@@ -3,29 +3,25 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #fff0f0, #ffe5e5);
-  font-family: "Poppins", sans-serif;
 }
 
 .error-box {
-  background: #ffffff;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
   padding: 40px 30px;
   text-align: center;
   border-radius: 16px;
-  width: 400px;
-  animation: fadeIn 0.6s ease-in-out;
+  width: 500px;
 }
 
 .error-box h2 {
   font-size: 24px;
-  color: #e63946;
+  color: var(--primary-color);
   margin-bottom: 12px;
 }
 
 .error-message {
   font-size: 16px;
-  color: #555;
+  color: var(--gray-200);
   margin-bottom: 20px;
 }
 
@@ -33,33 +29,4 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-}
-
-.retry-btn,
-.home-btn {
-  background: #e63946;
-  color: white;
-  border: none;
-  outline: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-
-.retry-btn:hover,
-.home-btn:hover {
-  background: #d62828;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
