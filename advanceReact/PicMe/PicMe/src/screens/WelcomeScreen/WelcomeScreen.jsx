@@ -4,6 +4,7 @@ import PMLeftSection from "../../components/PMLeftSection/PMLeftSection";
 import PMButton from "../../components/PMButton/PMButton";
 import PMRightSection from "../../components/PMRightSection/PMRightSection";
 import rightImg from "../../assets/images/cameraBlueHalf.png";
+import { NavLink } from "react-router-dom";
 const WelcomeScreen = () => {
   return (
     <>
@@ -16,10 +17,14 @@ const WelcomeScreen = () => {
             </h1>
             <div className="button-div">
               <PMButton varient="fill">
-                <span className="btn-text">Continue as customer</span>
+                <NavLink to="/login" className={"nav-link"}>
+                  <span className="btn-text">Continue as customer</span>
+                </NavLink>
               </PMButton>
               <PMButton varient="outline">
-                <span className="btn-text">Continue as Photgrapher</span>
+                <NavLink to="/login" className={"nav-link"}>
+                  <span className="btn-text">Continue as Photgrapher</span>
+                </NavLink>
               </PMButton>
             </div>
           </div>

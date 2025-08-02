@@ -13,6 +13,7 @@ import { SIGNUP_URL, ME } from "../../api/apiUrls";
 import { postAPIWithoutAuth } from "../../api/api";
 import { removeAccessToken, setAccessToken } from "../../utils/localStorage";
 import { signupSchema } from "../../schemas";
+import { NavLink } from "react-router-dom";
 const initialValues = {
   name: "",
   email: "",
@@ -129,7 +130,9 @@ const SignUpScreen = () => {
           {/* Already have account */}
           <p className="para">
             Already have an account? &nbsp;
-            <span className="span1">Login</span>
+            <NavLink to={"/login"} className={"nav-link"}>
+              <span className="span1">Login</span>
+            </NavLink>
           </p>
         </form>
       </PMLeftSection>

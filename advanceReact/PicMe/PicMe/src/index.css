@@ -63,6 +63,13 @@
   font-weight: bold;
   cursor: pointer;
 }
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+.nav-link.active {
+  color: inherit;
+}
 .span2 {
   color: var(--primary-color);
 }

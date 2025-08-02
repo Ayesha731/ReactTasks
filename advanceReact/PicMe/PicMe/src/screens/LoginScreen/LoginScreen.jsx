@@ -13,14 +13,16 @@ import { getApiWithAuth, postAPIWithoutAuth } from "../../api/api";
 import { removeAccessToken, setAccessToken } from "../../utils/localStorage";
 import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { loginSchema } from "../../schemas";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
   password: "",
-  rememberMe: false,
+  type: 0,
 };
 
 const LoginScreen = () => {
+  const navigate = useNavigate(); // For redirection
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -31,11 +33,19 @@ const LoginScreen = () => {
           const response = await postAPIWithoutAuth(LOGIN_URL, {
             email: values.email,
             password: values.password,
+            type: 0,
           });
 
           if (response.success) {
             console.log("Login Success:", response.data);
-            setAccessToken(response.headers.getAuthorization());
+
+            // Save token in localStorage
+            const token =
+              response.headers.getAuthorization?.() || "dummy-token";
+            setAccessToken(token);
+
+            // Redirect to Dashboard
+            navigate("/dashboard");
           } else {
             console.log("Login Failed:", response.data);
           }
@@ -109,7 +119,9 @@ const LoginScreen = () => {
           </PMButton>
           <p className="para">
             Don't have an account? &nbsp;
-            <span className="span1">Sign up</span>
+            <NavLink to="/signup" className={"nav-link"}>
+              <span className="span1">Sign up</span>
+            </NavLink>
           </p>
         </form>
       </PMLeftSection>
