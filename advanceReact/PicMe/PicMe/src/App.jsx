@@ -33,17 +33,17 @@ function App() {
           <Route
             path="login"
             element={
-              <PMPublicRoute>
-                <LoginScreen />
-              </PMPublicRoute>
+              // <PMPublicRoute>
+              <LoginScreen />
+              // </PMPublicRoute>
             }
           />
           <Route
             path="signup"
             element={
-              <PMPublicRoute>
-                <SignUpScreen />
-              </PMPublicRoute>
+              // <PMPublicRoute>
+              <SignUpScreen />
+              // </PMPublicRoute>
             }
           />
           <Route path="verification" element={<VerificationScreen />} />
