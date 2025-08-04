@@ -34,7 +34,7 @@
   align-items: center;
 }
 
-.nav-link {
+.nav-link1 {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -45,7 +45,7 @@
   transition: 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link1:hover,
+.nav-link1.active {
   font-weight: bold;
 }

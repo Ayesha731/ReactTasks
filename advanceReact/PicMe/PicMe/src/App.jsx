@@ -22,19 +22,36 @@ import PMProtectedRoute from "./components/PMProtectedRoute/PMProtectedRoute";
 import PMNotFound from "./components/PMNotFound/PMNotFound";
 import PMError from "./components/PMError/PMError";
 import ShowLocationScreen from "./screens/ShowLocationScreen/ShowLocationScreen";
+import ReviewsScreen from "./screens/ReviewsScreen/ReviewsScreen";
+import PMPublicRoute from "./components/PMPublicRoute/PMPublicRoute";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<RootLayout />} errorElement={<PMError />}>
           <Route index element={<WelcomeScreen />} />
-          <Route path="login" element={<LoginScreen />} />
-          <Route path="signup" element={<SignUpScreen />} />
+          <Route
+            path="login"
+            element={
+              <PMPublicRoute>
+                <LoginScreen />
+              </PMPublicRoute>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <PMPublicRoute>
+                <SignUpScreen />
+              </PMPublicRoute>
+            }
+          />
           <Route path="verification" element={<VerificationScreen />} />
           <Route path="new-password" element={<NewPasswordScreen />} />
           <Route path="password-changed" element={<PasswordChangedScreen />} />
           <Route path="choose-location" element={<ChooseLocationScreen />} />
           <Route path="show-location" element={<ShowLocationScreen />} />
+          <Route path="reviews" element={<ReviewsScreen />} />
           <Route
             path="dashboard"
             element={

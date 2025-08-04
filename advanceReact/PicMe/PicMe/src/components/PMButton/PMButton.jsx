@@ -1,7 +1,7 @@
 import React from "react";
 import "./PMButtonStyle.css";
 import classNames from "classnames";
-const PMButton = ({ children, varient, ...rest }) => {
+const PMButton = ({ children, varient, width, ...rest }) => {
   let checkVarient = varient ? `button-${varient}` : "";
 
   const allClasses = classNames(checkVarient);

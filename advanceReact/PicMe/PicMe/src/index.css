@@ -15,6 +15,8 @@
   --red: #e53535;
   --black-text: #120d26;
   --green: green;
+  --border-color: #e4dfdf40;
+  --inner-border: #d3d1d840;
 }
 
 .auth-screen {
@@ -41,6 +43,9 @@
   font-size: 32px;
   color: var(--black-text-color);
   text-align: center;
+}
+.auth-text3 {
+  font-size: 20px;
 }
 
 .para {

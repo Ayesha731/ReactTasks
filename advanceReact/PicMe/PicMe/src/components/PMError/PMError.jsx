@@ -24,10 +24,10 @@ const PMError = () => {
         </p>
         <div className="error-actions">
           <PMButton varient={"fill"} onClick={handleGoBack}>
-            🔙 Go Back
+            <span>🔙 Go Back</span>
           </PMButton>
           <PMButton varient={"outline"} onClick={handleGoHome}>
-            🏠 Go Home
+            <span> 🏠 Go Home</span>
           </PMButton>
         </div>
       </div>

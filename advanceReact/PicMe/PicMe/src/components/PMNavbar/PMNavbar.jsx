@@ -15,19 +15,19 @@ const PMNavbar = () => {
 
         <ul className="navbar-menu">
           <li>
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/" className="nav-link1">
               <HomeIcon />
               <span>Home</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/chats" className="nav-link">
+            <NavLink to="/chats" className="nav-link1">
               <ChatIcon />
               <span>Chats</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" className="nav-link">
+            <NavLink to="/profile" className="nav-link1">
               <ProfileMenuIcon />
               <span>Profile</span>
             </NavLink>
