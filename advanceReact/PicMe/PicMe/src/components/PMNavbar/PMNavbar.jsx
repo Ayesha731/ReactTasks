@@ -4,7 +4,7 @@ import HomeIcon from "../../assets/icons/HomeIcon";
 import { NavLink } from "react-router-dom";
 import logo2 from "../../assets/images/logo2.png";
 import ChatIcon from "../../assets/icons/ChatIcon";
-import ProfileMenuIcon from "../../assets/icons/profileMenuIcon";
+import ProfileMenuIcon from "../../assets/icons/ProfileMenuIcon";
 const PMNavbar = () => {
   return (
     <header className="header">
