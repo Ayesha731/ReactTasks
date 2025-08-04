@@ -3,7 +3,7 @@ import "./PMNavbarStyle.css";
 import HomeIcon from "../../assets/icons/HomeIcon";
 import { NavLink } from "react-router-dom";
 import logo2 from "../../assets/images/logo2.png";
-import ChatIcon from "../../assets/icons/chatIcon";
+import ChatIcon from "../../assets/icons/ChatIcon";
 import ProfileMenuIcon from "../../assets/icons/profileMenuIcon";
 const PMNavbar = () => {
   return (
