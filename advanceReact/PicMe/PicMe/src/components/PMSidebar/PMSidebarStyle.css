@@ -1,0 +1,56 @@
+.photographers-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 389px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--secondary-color);
+  gap: 20px;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  margin: 10px 0;
+}
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  background: var(--secondary-color);
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  z-index: 10;
+}
+
+.dropdown-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-list li.active {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.photographers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card {
+  background: var(--secondary-color);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 50%;
+}

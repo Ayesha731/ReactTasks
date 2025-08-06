@@ -24,6 +24,13 @@ import PMError from "./components/PMError/PMError";
 import ShowLocationScreen from "./screens/ShowLocationScreen/ShowLocationScreen";
 import ReviewsScreen from "./screens/ReviewsScreen/ReviewsScreen";
 import PMPublicRoute from "./components/PMPublicRoute/PMPublicRoute";
+import MessageScreen from "./screens/MessagesScreen/MessageScreen";
+import PhotographerProfileScreen from "./screens/PhotographerProfileScreen/PhotographerProfileScreen";
+import CheckoutScreen from "./screens/CheckoutScreen/CheckoutScreen";
+import ScheduleScreen from "./screens/ScheduleScreen/ScheduleScreen";
+import CardDetailScreen from "./screens/CardDetailScreen/CardDetailScreen";
+import ConfirmBookingScreen from "./screens/ConfirmBookingScreen/ConfirmBookingScreen";
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,7 +38,7 @@ function App() {
         <Route path="/" element={<RootLayout />} errorElement={<PMError />}>
           <Route index element={<WelcomeScreen />} />
           <Route
-            path="login"
+            path="/login"
             element={
               // <PMPublicRoute>
               <LoginScreen />
@@ -39,27 +46,45 @@ function App() {
             }
           />
           <Route
-            path="signup"
+            path="/signup"
             element={
               // <PMPublicRoute>
               <SignUpScreen />
               // </PMPublicRoute>
             }
           />
-          <Route path="verification" element={<VerificationScreen />} />
-          <Route path="new-password" element={<NewPasswordScreen />} />
-          <Route path="password-changed" element={<PasswordChangedScreen />} />
-          <Route path="choose-location" element={<ChooseLocationScreen />} />
-          <Route path="show-location" element={<ShowLocationScreen />} />
-          <Route path="reviews" element={<ReviewsScreen />} />
+
           <Route
-            path="dashboard"
+            path="/dashboard"
             element={
               <PMProtectedRoute>
                 <DashboardScreen />
               </PMProtectedRoute>
             }
           />
+
+          <Route
+            path="chat"
+            element={
+              <PMProtectedRoute>
+                <MessageScreen />
+              </PMProtectedRoute>
+            }
+          />
+
+          <Route path="verification" element={<VerificationScreen />} />
+          <Route path="new-password" element={<NewPasswordScreen />} />
+          <Route path="password-changed" element={<PasswordChangedScreen />} />
+          <Route path="choose-location" element={<ChooseLocationScreen />} />
+          <Route path="show-location" element={<ShowLocationScreen />} />
+          <Route path="reviews" element={<ReviewsScreen />} />
+          <Route path="photographer" element={<PhotographerProfileScreen />} />
+          <Route path="checkout" element={<CheckoutScreen />} />
+          <Route path="schedule" element={<ScheduleScreen />} />
+          <Route path="card-details" element={<CardDetailScreen />} />
+          <Route path="confirm-booking" element={<ConfirmBookingScreen />} />
+          <Route path="messages" element={<MessageScreen />} />
+
           <Route path="*" element={<PMNotFound />} />
         </Route>
         {/* 404 PAGE OUTSIDE ROOT */}

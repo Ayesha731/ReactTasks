@@ -56,3 +56,18 @@ export const newPasswordSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm password is required"),
 });
+
+export const cardDetailsSchema = Yup.object({
+  name: Yup.string()
+    .required("Card Holder Name is required")
+    .min(3, "Name must be at least 3 characters"),
+  number: Yup.string()
+    .required("Card Number is required")
+    .matches(/^[0-9]{16}$/, "Card number must be 16 digits"),
+  expiry: Yup.string()
+    .required("Expiry Date is required")
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Use MM/YY format"),
+  csv: Yup.string()
+    .required("CSV is required")
+    .matches(/^[0-9]{3,4}$/, "CSV must be 3 or 4 digits"),
+});

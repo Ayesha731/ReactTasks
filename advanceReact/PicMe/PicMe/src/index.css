@@ -17,6 +17,11 @@
   --green: green;
   --border-color: #e4dfdf40;
   --inner-border: #d3d1d840;
+  --basic-card-color: #2bc7a5cc;
+  --essentail-card-color: #2bafc7;
+  --premium-card-color: #1aceef;
+  --light-blue: #f2fafc;
+  --radio-border: #e2e3e4;
 }
 
 .auth-screen {
@@ -45,6 +50,13 @@
   text-align: center;
 }
 .auth-text3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--black-text-color);
+  text-align: center;
+}
+.auth-text3 {
   font-size: 20px;
 }
 
@@ -53,6 +65,22 @@
   font-weight: 400;
   text-align: center;
   color: var(--gray-200);
+}
+.para-main {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--gray-200);
+}
+.para-reviews {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--gray-200);
+}
+.rating1 {
+  font-size: 20px;
+  font-weight: 600;
 }
 .para1 {
   cursor: pointer;
@@ -77,6 +105,16 @@
 }
 .span2 {
   color: var(--primary-color);
+}
+.span3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.span4 {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
 }
 
 .form {

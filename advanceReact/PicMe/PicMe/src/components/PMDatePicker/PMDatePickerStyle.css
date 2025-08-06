@@ -1,0 +1,121 @@
+.date-card-content {
+  background: var(--light-blue);
+  border-radius: 12px;
+  max-width: 415px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+/* Date range top section */
+.date-range {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-color);
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.date-label {
+  font-size: 12px;
+  color: var(--gray-200);
+  margin-bottom: 4px;
+}
+
+.date-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black-text);
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: var(--gray-100);
+}
+
+/* Calendar section */
+.calendar-section {
+  width: 100%;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.calendar-month {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--black-text);
+}
+
+/* Day headers (Mon, Tue...) */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-200);
+  margin-bottom: 8px;
+}
+
+/* Dates grid */
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.date {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: var(--black-text);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.date:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+/* Selected date */
+.date.selected {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+/* Range highlight */
+.date.in-range {
+  background: rgba(43, 175, 199, 0.2);
+  border-radius: 50%;
+  color: var(--black-text);
+}
+
+/* Empty dates */
+.date.empty {
+  pointer-events: none;
+  visibility: hidden;
+}

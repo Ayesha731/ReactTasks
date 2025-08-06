@@ -1,16 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { getAccessToken, removeAccessToken } from "../../utils/localStorage";
 
 const PMPublicRoute = ({ children }) => {
-  const token = getAccessToken();
+  const token = localStorage.getItem("access_token");
 
+  // If token exists → redirect to dashboard
   if (token) {
-    removeAccessToken();
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
-  return children;
+  return children; // No token → show login/signup page
 };
 
 export default PMPublicRoute;

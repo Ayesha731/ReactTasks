@@ -1,0 +1,106 @@
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  color: var(--secondary-color);
+  border-radius: 19.02px;
+  max-width: 515px;
+  width: 100%;
+  height: 564px;
+  padding: 40px 30px 30px;
+  position: relative;
+  box-sizing: border-box;
+  /* transition: transform 0.2s ease-in-out; */
+}
+
+/* .card-wrapper:hover {
+  transform: translateY(-5px);
+} */
+
+.card-icon {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 20px 0;
+}
+
+.card-text {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 0 !important; /* Force remove margin */
+  line-height: 1.2; /* Reduce vertical spacing */
+}
+
+.card-title {
+  font-size: 96px;
+  font-weight: 600;
+  margin: 0 !important; /* Force remove margin */
+  line-height: 1; /* Tighten space between heading and price */
+}
+
+.points ul {
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.points ul li {
+  position: relative;
+  padding-left: 29px;
+  line-height: 2.2;
+}
+
+.points ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.7em; /* Bullet size */
+  color: var(--secondary-color); /* Bullet color */
+}
+
+/* Button fixed at bottom */
+.card-btn {
+  margin-top: auto;
+}
+
+.card-btn .btn {
+  width: 100%;
+}
+.card-btn .btn > button {
+  display: block;
+  width: calc(100%); /* Strict width only for button */
+  max-width: none !important; /* Break PMButton max-width limit */
+}
+.card-btn .btn-text {
+  font-size: 20px;
+  font-weight: 600; /* Semi-bold */
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .card-wrapper {
+    height: auto;
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 56px;
+  }
+
+  .card-text {
+    font-size: 22px;
+  }
+
+  .points ul li {
+    font-size: 16px;
+  }
+}

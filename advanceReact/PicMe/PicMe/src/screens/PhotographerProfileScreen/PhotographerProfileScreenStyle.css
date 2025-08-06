@@ -1,0 +1,15 @@
+.porfile-upper-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45%;
+
+  padding-top: 20px;
+}
+.porfile-lower-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55%;
+  border: 2px solid orangered;
+}
