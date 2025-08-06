@@ -29,7 +29,7 @@ const PMPhotographerProfile = ({ image, name, type, rating, totalReviews }) => (
         </NavLink>
       </PMButton>
       <PMButton varient="outline">
-        <NavLink to="/" className="nav-link">
+        <NavLink to="/checkout" className="nav-link">
           <span className="span4 ">
             <PackagesIcon /> Package
           </span>
