@@ -25,9 +25,10 @@ const PMGalleryContent = ({ activeTab, photos, videos, reviews }) => {
         );
       case "reviews":
         return (
-          <div className="gallery-grid">
+          <div className="reviews-grid ">
             {reviews.map((review) => (
               <div key={review.id} className="review-card">
+                <h1>{review.user}</h1>
                 <p>{review.text}</p>
               </div>
             ))}

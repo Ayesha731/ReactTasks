@@ -7,12 +7,20 @@ import { getApiWithAuth } from "../../api/api";
 import { getAccessToken, removeAccessToken } from "../../utils/localStorage";
 import "./PMSidebarStyle.css";
 import PMInput from "../PMInput/PMInput";
+const photographerTypes = [
+  "Wedding Photographer",
+  "Street Photographer",
+  "Birthday Photographer",
+  "Concert Photographer",
+  "Travel Photographer",
+];
 
 const PMSidebar = ({ searchData, onBack }) => {
   const [photographers, setPhotographers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedPhotographer, setSelectedPhotographer] = useState(null);
+  
 
   // Fetch photographers when component mounts
   useEffect(() => {
@@ -164,6 +172,30 @@ const PMSidebar = ({ searchData, onBack }) => {
           placeholder="Search photographers"
           type="text"
         />
+      </div>
+      <div className="dropdown-wrapper">
+        <PMButton
+          varient="primary"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          {selectedType}
+        </PMButton>
+        {dropdownOpen && (
+          <ul className="dropdown-list">
+            {photographerTypes.map((type) => (
+              <li
+                key={type}
+                className={selectedType === type ? "active" : ""}
+                onClick={() => {
+                  setSelectedType(type);
+                  setDropdownOpen(false);
+                }}
+              >
+                {type}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       {/* Search Info */}
       <div className="search-info">
