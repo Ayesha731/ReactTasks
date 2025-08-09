@@ -3,6 +3,13 @@ import "./PMMapSearchBarStyle.css";
 import ArrowBackIcon from "../../assets/icons/ArrowBackIcon";
 import DirectionIcon from "../../assets/icons/DirectionIcon";
 import CalendarIcon from "../../assets/icons/CalenderIcon";
+import { FaSearch } from "react-icons/fa";
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return "";
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  return new Date(dateStr).toLocaleDateString(undefined, options);
+};
 
 const PMMapSearchBar = ({ onSearch }) => {
   const [photographerName, setPhotographerName] = useState("");
@@ -10,13 +17,11 @@ const PMMapSearchBar = ({ onSearch }) => {
   const [toDate, setToDate] = useState("");
 
   const handleSearchClick = () => {
-    // Validate that at least photographer name is entered
     if (!photographerName.trim()) {
       alert("Please enter photographer name or type");
       return;
     }
 
-    // Pass search data to parent component (ShowLocationScreen)
     onSearch({
       photographerName: photographerName.trim(),
       fromDate,
@@ -48,7 +53,7 @@ const PMMapSearchBar = ({ onSearch }) => {
       <div className="lower-map-search">
         <div className="date-row">
           <div className="date-input">
-            <span>From</span>
+            <span>{fromDate ? formatDate(fromDate) : "From"}</span>
             <input
               type="date"
               value={fromDate}
@@ -57,8 +62,9 @@ const PMMapSearchBar = ({ onSearch }) => {
             />
             <CalendarIcon />
           </div>
+
           <div className="date-input">
-            <span>To</span>
+            <span>{toDate ? formatDate(toDate) : "To"}</span>
             <input
               type="date"
               value={toDate}
@@ -67,8 +73,9 @@ const PMMapSearchBar = ({ onSearch }) => {
             />
             <CalendarIcon />
           </div>
+
           <div className="icon search-icon-btn" onClick={handleSearchClick}>
-            <DirectionIcon />
+            <FaSearch />
           </div>
         </div>
       </div>

@@ -123,6 +123,15 @@
   background-color: var(--light-blue);
 }
 
+.search-icon-btn svg {
+  color: var(--gray-200);
+}
+
+.date-input span {
+  flex: 1;
+  color: var(--black-text);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .map-search-bar {

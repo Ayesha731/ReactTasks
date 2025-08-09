@@ -37,3 +37,10 @@
   font-size: 12px;
   font-weight: 500;
 }
+.input-icon.end {
+  margin-left: auto; /* Pushes icon to far right inside flex container */
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: var(--gray-300);
+}

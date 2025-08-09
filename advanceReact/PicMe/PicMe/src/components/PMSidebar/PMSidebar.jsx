@@ -7,6 +7,7 @@ import { getApiWithAuth } from "../../api/api";
 import { getAccessToken, removeAccessToken } from "../../utils/localStorage";
 import "./PMSidebarStyle.css";
 import PMInput from "../PMInput/PMInput";
+import CheckIcon from "../../assets/icons/CheckIcon";
 const photographerTypes = [
   "Wedding Photographer",
   "Street Photographer",
@@ -20,7 +21,8 @@ const PMSidebar = ({ searchData, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedPhotographer, setSelectedPhotographer] = useState(null);
-  
+  const [selectedType, setSelectedType] = useState("Street Photographer");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Fetch photographers when component mounts
   useEffect(() => {
@@ -157,46 +159,49 @@ const PMSidebar = ({ searchData, onBack }) => {
       {/* Header with back button */}
       <div className="sidebar-header">
         <button onClick={onBack} className="back-btn">
-          <PMInput
-            icon={<ArrowBackIcon />}
-            placeholder="Northup Way"
-            type="text"
-          />
+          <div style={{ width: "100%" }}>
+            <PMInput
+              icon={<ArrowBackIcon />}
+              placeholder="Northup Way"
+              type="text"
+            />
+          </div>
         </button>
+
         <h1 className="auth-text">Photographers Lists</h1>
         <p className="para para2">
           Find the best photographers in your area for your next event!
         </p>
-        <PMInput
-          icon={<FaSearch />}
-          placeholder="Search photographers"
-          type="text"
-        />
+        <div className="dropdown-wrapper">
+          <div style={{ width: "100%" }}>
+            <PMInput
+              icon={<FaSearch />}
+              placeholder="Search photographers"
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              onFocus={() => setDropdownOpen(true)}
+              endIcon={<CheckIcon />}
+            />
+          </div>
+
+          {dropdownOpen && (
+            <ul className="dropdown-list">
+              {photographerTypes.map((type) => (
+                <li
+                  key={type}
+                  onClick={() => {
+                    setSelectedType(type);
+                    setDropdownOpen(false);
+                  }}
+                >
+                  {type}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-      <div className="dropdown-wrapper">
-        <PMButton
-          varient="primary"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          {selectedType}
-        </PMButton>
-        {dropdownOpen && (
-          <ul className="dropdown-list">
-            {photographerTypes.map((type) => (
-              <li
-                key={type}
-                className={selectedType === type ? "active" : ""}
-                onClick={() => {
-                  setSelectedType(type);
-                  setDropdownOpen(false);
-                }}
-              >
-                {type}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+
       {/* Search Info */}
       <div className="search-info">
         <p className="para para2">
@@ -210,60 +215,56 @@ const PMSidebar = ({ searchData, onBack }) => {
         )}
       </div>
 
-      {/* Error State */}
-      {error && (
-        <div className="error-container">
-          <div className="error-content">
-            <FaSearch className="error-icon" />
-            <p className="error-text">{error}</p>
-            <PMButton varient="outline" onClick={handleRetry}>
-              <span className="btn-text">Retry</span>
-            </PMButton>
+      {/* Photographer Results Section (Fixed Height to prevent jump) */}
+      <div className="photographers-section">
+        {loading ? (
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p className="loading-text">Searching photographers...</p>
           </div>
-        </div>
-      )}
-
-      {/* Loading State */}
-      {loading && (
-        <div className="loading-container">
-          <div className="spinner"></div>
-          <p className="loading-text">Searching photographers...</p>
-        </div>
-      )}
-
-      {/* Photographer Results */}
-      {!loading && !error && (
-        <div className="photographers-results">
-          <p className="results-count">
-            Found {photographers.length} photographer
-            {photographers.length !== 1 ? "s" : ""}
-          </p>
-
-          {photographers.length > 0 ? (
-            <div className="photographers-list">
-              {photographers.map((photographer) => (
-                <PMPhotographerProfile
-                  key={photographer.id}
-                  name={photographer.name}
-                  type={photographer.type}
-                  rating={photographer.rating}
-                  totalReviews={photographer.totalReviews}
-                  showButtons={false}
-                  onClick={() => handlePhotographerClick(photographer)}
-                />
-              ))}
+        ) : error ? (
+          <div className="error-container">
+            <div className="error-content">
+              <FaSearch className="error-icon" />
+              <p className="error-text">{error}</p>
+              <PMButton varient="outline" onClick={handleRetry}>
+                <span className="btn-text">Retry</span>
+              </PMButton>
             </div>
-          ) : (
-            <div className="no-results">
-              <FaSearch className="no-results-icon" />
-              <p>No photographers found</p>
-              <p className="no-results-subtitle">
-                Try adjusting your search criteria
-              </p>
-            </div>
-          )}
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="photographers-results">
+            <p className="results-count">
+              Found {photographers.length} photographer
+              {photographers.length !== 1 ? "s" : ""}
+            </p>
+
+            {photographers.length > 0 ? (
+              <div className="photographers-list">
+                {photographers.map((photographer) => (
+                  <PMPhotographerProfile
+                    key={photographer.id}
+                    name={photographer.name}
+                    type={photographer.type}
+                    rating={photographer.rating}
+                    totalReviews={photographer.totalReviews}
+                    showButtons={false}
+                    onClick={() => handlePhotographerClick(photographer)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="no-results">
+                <FaSearch className="no-results-icon" />
+                <p>No photographers found</p>
+                <p className="no-results-subtitle">
+                  Try adjusting your search criteria
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
