@@ -36,24 +36,68 @@ function App() {
     createRoutesFromElements(
       <>
         <Route path="/" element={<RootLayout />} errorElement={<PMError />}>
+          {/* Welcome Screen - Always accessible */}
           <Route index element={<WelcomeScreen />} />
+
+          {/* Public Routes - Only accessible when NOT logged in */}
           <Route
             path="/login"
             element={
-              // <PMPublicRoute>
-              <LoginScreen />
-              // </PMPublicRoute>
+              <PMPublicRoute>
+                <LoginScreen />
+              </PMPublicRoute>
             }
           />
           <Route
             path="/signup"
             element={
-              // <PMPublicRoute>
-              <SignUpScreen />
-              // </PMPublicRoute>
+              <PMPublicRoute>
+                <SignUpScreen />
+              </PMPublicRoute>
+            }
+          />
+          <Route
+            path="/verification"
+            element={
+              <PMPublicRoute>
+                <VerificationScreen />
+              </PMPublicRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <PMPublicRoute>
+                <ForgotPasswordScreen />
+              </PMPublicRoute>
+            }
+          />
+          <Route
+            path="/new-password"
+            element={
+              <PMPublicRoute>
+                <NewPasswordScreen />
+              </PMPublicRoute>
+            }
+          />
+          <Route
+            path="/password-changed"
+            element={
+              <PMPublicRoute>
+                <PasswordChangedScreen />
+              </PMPublicRoute>
             }
           />
 
+          {/* Protected Routes - Only accessible when logged in */}
+          <Route
+            path="/choose-location"
+            element={
+              <PMProtectedRoute>
+                <ChooseLocationScreen />
+              </PMProtectedRoute>
+            }
+          />
           <Route
             path="/dashboard"
             element={
@@ -62,9 +106,72 @@ function App() {
               </PMProtectedRoute>
             }
           />
-
           <Route
-            path="chat"
+            path="/show-location"
+            element={
+              <PMProtectedRoute>
+                <ShowLocationScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/reviews"
+            element={
+              <PMProtectedRoute>
+                <ReviewsScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/photographer"
+            element={
+              <PMProtectedRoute>
+                <PhotographerProfileScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <PMProtectedRoute>
+                <CheckoutScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/schedule"
+            element={
+              <PMProtectedRoute>
+                <ScheduleScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/card-details"
+            element={
+              <PMProtectedRoute>
+                <CardDetailScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/confirm-booking"
+            element={
+              <PMProtectedRoute>
+                <ConfirmBookingScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/messages"
+            element={
+              <PMProtectedRoute>
+                <MessageScreen />
+              </PMProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat"
             element={
               <PMProtectedRoute>
                 <MessageScreen />
@@ -72,19 +179,7 @@ function App() {
             }
           />
 
-          <Route path="verification" element={<VerificationScreen />} />
-          <Route path="new-password" element={<NewPasswordScreen />} />
-          <Route path="password-changed" element={<PasswordChangedScreen />} />
-          <Route path="choose-location" element={<ChooseLocationScreen />} />
-          <Route path="show-location" element={<ShowLocationScreen />} />
-          <Route path="reviews" element={<ReviewsScreen />} />
-          <Route path="photographer" element={<PhotographerProfileScreen />} />
-          <Route path="checkout" element={<CheckoutScreen />} />
-          <Route path="schedule" element={<ScheduleScreen />} />
-          <Route path="card-details" element={<CardDetailScreen />} />
-          <Route path="confirm-booking" element={<ConfirmBookingScreen />} />
-          <Route path="messages" element={<MessageScreen />} />
-
+          {/* 404 Page */}
           <Route path="*" element={<PMNotFound />} />
         </Route>
         {/* 404 PAGE OUTSIDE ROOT */}
@@ -96,14 +191,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      {/* <WelcomeScreen /> */}
-      {/* <LoginScreen /> */}
-      {/* <SignUpScreen /> */}
-      {/* <VerificationScreen /> */}
-      {/* <ForgotPasswordScreen /> */}
-      {/* <NewPasswordScreen /> */}
-      {/* <PasswordChangedScreen /> */}
-      {/* <ChooseLocationScreen /> */}
     </>
   );
 }

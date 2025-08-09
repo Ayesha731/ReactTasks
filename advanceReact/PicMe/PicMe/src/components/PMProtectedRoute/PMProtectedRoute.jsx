@@ -1,15 +1,31 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../customHooks/useAuth";
+import PMLoadingSpinner from "../PMLoadingSpinner/PMLoadingSpinner";
 
 const PMProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("access_token");
+  const { isAuthenticated, isLoading } = useAuth();
 
-  // If no token → redirect to login
-  if (!token) {
+  console.log(
+    "ProtectedRoute - isLoading:",
+    isLoading,
+    "isAuthenticated:",
+    isAuthenticated
+  );
+
+  // Show loading spinner while checking authentication
+  if (isLoading) {
+    return <PMLoadingSpinner size="medium" text="Verifying your access..." />;
+  }
+
+  // If not authenticated → redirect to login
+  if (!isAuthenticated) {
+    console.log("Not authenticated, redirecting to login");
     return <Navigate to="/login" replace />;
   }
 
-  return children; // If token exists → show the page
+  console.log("Authenticated, showing protected content");
+  return children; // If authenticated → show the page
 };
 
 export default PMProtectedRoute;

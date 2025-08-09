@@ -1,14 +1,231 @@
 .photographers-container {
   display: flex;
   flex-direction: column;
-  max-width: 389px;
+  max-width: 450px;
   width: 100%;
   padding: 20px;
-  border-radius: 10px;
   background: var(--secondary-color);
-  gap: 20px;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Position sidebar exactly where PMMapSearchBar was */
+.sidebar-position {
+  position: absolute;
+  top: 0px;
+  left: 82%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Sidebar Header with Back Button */
+.sidebar-header {
+  max-width: 389px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px 30px 20px 30px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.sidebar-header input {
+  width: 100%;
+}
+
+.back-btn {
+  max-width: 389px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: var(--light-blue);
+}
+
+/* Search Info */
+.search-info {
+  background: var(--light-blue);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.search-info p {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.search-info strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Error Container */
+.error-container {
+  background: #fef2f2;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-icon {
+  color: var(--red);
+  font-size: 24px;
+}
+
+.error-text {
+  color: var(--red);
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 15px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: var(--gray-200);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Results Section */
+.photographers-results {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.results-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black-text);
+  margin: 0;
+  padding: 0 5px;
+}
+
+/* Photographers List */
+.photographers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.photographer-item {
+  display: flex;
+  align-items: center;
+  background: var(--secondary-color);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 12px;
+}
+
+.photographer-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
+}
+
+.photographer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gray-100);
+}
+
+.photographer-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* No Results */
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  gap: 10px;
+}
+
+.no-results-icon {
+  font-size: 32px;
+  color: var(--gray-200);
+  margin-bottom: 10px;
+}
+
+.no-results p {
+  color: var(--gray-200);
+  font-size: 14px;
+  margin: 0;
+}
+
+.no-results-subtitle {
+  font-size: 12px !important;
+  color: var(--gray-300) !important;
+}
+
+/* Profile Container when showing individual photographer */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Dropdown styles (from your original PMSidebar) */
 .dropdown-wrapper {
   position: relative;
   margin: 10px 0;
@@ -24,33 +241,55 @@
   list-style: none;
   padding: 0;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dropdown-list li {
-  padding: 10px;
+  padding: 12px 16px;
   cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-list li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-list li:hover {
+  background: #f8f9fa;
 }
 
 .dropdown-list li.active {
   background: var(--primary-color);
   color: var(--secondary-color);
+  font-weight: 600;
 }
 
-.photographers-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 15px;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar-position {
+    left: 50%;
+    top: 120px;
+    max-width: 350px;
+  }
 
-.card {
-  background: var(--secondary-color);
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px;
-}
+  .photographers-container {
+    max-height: 500px;
+    padding: 15px;
+  }
 
-.avatar {
-  width: 60px;
-  border-radius: 50%;
+  .photographer-item {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .photographer-avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .sidebar-header h2 {
+    font-size: 18px;
+  }
 }

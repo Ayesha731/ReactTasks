@@ -1,111 +1,237 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaStar } from "react-icons/fa";
 import ArrowBackIcon from "../../assets/icons/ArrowBackIcon";
-import PMInput from "../PMInput/PMInput";
 import PMButton from "../PMButton/PMButton";
+import PMPhotographerProfile from "../PMPhotographerProfile/PMPhotographerProfile";
+import { getApiWithAuth } from "../../api/api";
+import { getAccessToken, removeAccessToken } from "../../utils/localStorage";
 import "./PMSidebarStyle.css";
-const photographerTypes = [
-  "Wedding Photographer",
-  "Street Photographer",
-  "Birthday Photographer",
-  "Concert Photographer",
-  "Travel Photographer",
-];
+import PMInput from "../PMInput/PMInput";
 
-const PMSidebar = () => {
-  const [search, setSearch] = useState("");
-  const [selectedType, setSelectedType] = useState("Street Photographer");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+const PMSidebar = ({ searchData, onBack }) => {
   const [photographers, setPhotographers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedPhotographer, setSelectedPhotographer] = useState(null);
 
-  // ✅ Fetch photographers from backend when search or filter changes
+  // Fetch photographers when component mounts
   useEffect(() => {
-    const fetchPhotographers = async () => {
-      try {
-        const response = await fetch(
-          `http://your-backend-api.com/photographers?search=${search}&type=${selectedType}`
-        );
-        const data = await response.json();
-        setPhotographers(data);
-      } catch (error) {
-        console.error("Error fetching photographers:", error);
-      }
-    };
     fetchPhotographers();
-  }, [search, selectedType]);
+  }, []);
+
+  const fetchPhotographers = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Check if token exists
+      const token = await getAccessToken();
+      if (!token) {
+        setError("Token not found. Please login again.");
+        setLoading(false);
+        return;
+      }
+
+      // Call your backend API
+      const response = await getApiWithAuth(
+        `/photographers?search=${encodeURIComponent(
+          searchData.photographerName
+        )}&from_date=${searchData.fromDate}&to_date=${searchData.toDate}`
+      );
+
+      if (response.success) {
+        // Handle successful response
+        const photographersList =
+          response.data.photographers || response.data || [];
+        setPhotographers(photographersList);
+      } else {
+        // Handle API error
+        if (
+          response.data?.message?.includes("Token not found") ||
+          response.data?.error?.includes("Unauthorized")
+        ) {
+          setError("Session expired. Please login again.");
+          await removeAccessToken();
+          // In real app, redirect to login
+        } else {
+          setError(response.data?.message || "Failed to fetch photographers");
+        }
+
+        // Fallback to mock data for demo
+        setPhotographers([
+          {
+            id: 1,
+            name: "Sarah Johnson",
+            type: "Wedding Photographer",
+            rating: 4.8,
+            totalReviews: 120,
+            avatar:
+              "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+          },
+          {
+            id: 2,
+            name: "Michael Chen",
+            type: "Street Photographer",
+            rating: 4.9,
+            totalReviews: 85,
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+          },
+          {
+            id: 3,
+            name: "Emma Rodriguez",
+            type: "Birthday Photographer",
+            rating: 4.7,
+            totalReviews: 95,
+            avatar:
+              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+          },
+        ]);
+      }
+    } catch (err) {
+      console.error("API Error:", err);
+      setError("Network error. Please check your connection.");
+
+      // Fallback to mock data
+      setPhotographers([
+        {
+          id: 1,
+          name: "Sarah Johnson",
+          type: "Wedding Photographer",
+          rating: 4.8,
+          totalReviews: 120,
+          avatar:
+            "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRetry = () => {
+    fetchPhotographers();
+  };
+
+  const handlePhotographerClick = (photographer) => {
+    setSelectedPhotographer(photographer);
+  };
+
+  // If photographer is selected, show profile
+  if (selectedPhotographer) {
+    return (
+      <div className="photographers-container sidebar-position">
+        <div className="sidebar-header">
+          <button
+            onClick={() => setSelectedPhotographer(null)}
+            className="back-btn"
+          >
+            <ArrowBackIcon />
+          </button>
+          <h2 className="auth-text">Photographer Profile</h2>
+        </div>
+
+        <div className="profile-container">
+          <PMPhotographerProfile
+            image={selectedPhotographer.avatar}
+            name={selectedPhotographer.name}
+            type={selectedPhotographer.type}
+            rating={selectedPhotographer.rating}
+            totalReviews={selectedPhotographer.totalReviews}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="photographers-container">
-      <PMInput
-        icon={<ArrowBackIcon />}
-        placeholder="Northup Ways"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      {/* Title */}
-      <h2 className="auth-text">Photographers Lists</h2>
-      <p className="para para2">
-        Find the best photographers in your area for your next event!
-      </p>
-
-      {/* Search Input */}
-      <PMInput
-        icon={<FaSearch />}
-        placeholder="Search photographers"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
-      {/* Dropdown */}
-      <div className="dropdown-wrapper">
-        <PMButton varient="fill" onClick={() => setDropdownOpen(!dropdownOpen)}>
-          {selectedType}
-        </PMButton>
-        {dropdownOpen && (
-          <ul className="dropdown-list">
-            {photographerTypes.map((type) => (
-              <li
-                key={type}
-                className={selectedType === type ? "active" : ""}
-                onClick={() => {
-                  setSelectedType(type);
-                  setDropdownOpen(false);
-                }}
-              >
-                {type}
-              </li>
-            ))}
-          </ul>
+    <div className="photographers-container sidebar-position">
+      {/* Header with back button */}
+      <div className="sidebar-header">
+        <button onClick={onBack} className="back-btn">
+          <PMInput
+            icon={<ArrowBackIcon />}
+            placeholder="Northup Way"
+            type="text"
+          />
+        </button>
+        <h1 className="auth-text">Photographers Lists</h1>
+        <p className="para para2">
+          Find the best photographers in your area for your next event!
+        </p>
+        <PMInput
+          icon={<FaSearch />}
+          placeholder="Search photographers"
+          type="text"
+        />
+      </div>
+      {/* Search Info */}
+      <div className="search-info">
+        <p className="para para2">
+          Searching for: <strong>{searchData.photographerName}</strong>
+        </p>
+        {searchData.fromDate && (
+          <p className="para para2">
+            From: {searchData.fromDate}{" "}
+            {searchData.toDate && `to ${searchData.toDate}`}
+          </p>
         )}
       </div>
 
-      {/* Photographer Cards */}
-      <div className="photographers-grid">
-        {photographers.length > 0 ? (
-          photographers.map((p, index) => (
-            <div className="card" key={index}>
-              <img
-                src={
-                  p.avatar ||
-                  "https://cdn-icons-png.flaticon.com/512/5556/5556499.png"
-                }
-                alt={p.name}
-                className="avatar"
-              />
-              <h3>{p.name}</h3>
-              <p>{p.type}</p>
-              <div className="rating">
-                <FaStar color="gold" />{" "}
-                <span>
-                  {p.rating} ({p.reviews} reviews)
-                </span>
-              </div>
+      {/* Error State */}
+      {error && (
+        <div className="error-container">
+          <div className="error-content">
+            <FaSearch className="error-icon" />
+            <p className="error-text">{error}</p>
+            <PMButton varient="outline" onClick={handleRetry}>
+              <span className="btn-text">Retry</span>
+            </PMButton>
+          </div>
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading && (
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Searching photographers...</p>
+        </div>
+      )}
+
+      {/* Photographer Results */}
+      {!loading && !error && (
+        <div className="photographers-results">
+          <p className="results-count">
+            Found {photographers.length} photographer
+            {photographers.length !== 1 ? "s" : ""}
+          </p>
+
+          {photographers.length > 0 ? (
+            <div className="photographers-list">
+              {photographers.map((photographer) => (
+                <PMPhotographerProfile
+                  key={photographer.id}
+                  name={photographer.name}
+                  type={photographer.type}
+                  rating={photographer.rating}
+                  totalReviews={photographer.totalReviews}
+                  showButtons={false}
+                  onClick={() => handlePhotographerClick(photographer)}
+                />
+              ))}
             </div>
-          ))
-        ) : (
-          <p>No photographers found</p>
-        )}
-      </div>
+          ) : (
+            <div className="no-results">
+              <FaSearch className="no-results-icon" />
+              <p>No photographers found</p>
+              <p className="no-results-subtitle">
+                Try adjusting your search criteria
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

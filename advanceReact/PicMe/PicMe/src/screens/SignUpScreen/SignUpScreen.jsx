@@ -14,6 +14,7 @@ import { postAPIWithoutAuth } from "../../api/api";
 import { removeAccessToken, setAccessToken } from "../../utils/localStorage";
 import { signupSchema } from "../../schemas";
 import { NavLink } from "react-router-dom";
+
 const initialValues = {
   name: "",
   email: "",
@@ -21,6 +22,7 @@ const initialValues = {
   confirmPassword: "",
   type: 0,
 };
+
 const SignUpScreen = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
@@ -53,6 +55,7 @@ const SignUpScreen = () => {
         action.resetForm();
       },
     });
+
   return (
     <div className="auth-screen">
       <PMLeftSection>
@@ -110,11 +113,11 @@ const SignUpScreen = () => {
             <span className="btn-text">Sign Up</span>
           </PMButton>
 
-          {/* Divider */}
-          <div className="divider">
-            <span className="line1"></span>
+          {/* FIXED DIVIDER - Same as login */}
+          <div className="divider-direct">
+            <div className="line1"></div>
             <span className="text">OR</span>
-            <span className="line2"></span>
+            <div className="line2"></div>
           </div>
 
           {/* Social Login Buttons */}

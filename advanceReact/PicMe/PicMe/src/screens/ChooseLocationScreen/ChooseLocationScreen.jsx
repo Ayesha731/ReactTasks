@@ -3,6 +3,7 @@ import PMLeftSection from "../../components/PMLeftSection/PMLeftSection";
 import "./ChooseLocationScreenStyle.css";
 import PMButton from "../../components/PMButton/PMButton";
 import MapIcon from "../../assets/icons/MapIcon";
+import { NavLink } from "react-router-dom";
 const ChooseLocationScreen = () => {
   return (
     <div className="location-wrapper">
@@ -14,9 +15,12 @@ const ChooseLocationScreen = () => {
             Find the best photographers in your <br />
             area for your next event!
           </p>
-          <PMButton varient="fill">
-            <span className="btn-text">Choose Location</span>
-          </PMButton>
+
+          <NavLink to={"/show-location"} className="nav-link">
+            <PMButton varient="fill">
+              <span className="btn-text">Choose Location</span>
+            </PMButton>
+          </NavLink>
         </div>
       </PMLeftSection>
     </div>
