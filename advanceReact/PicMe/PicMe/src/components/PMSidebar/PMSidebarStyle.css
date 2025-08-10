@@ -159,32 +159,37 @@
 
 /* Photographers List */
 .photographers-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
 .photographer-item {
+  /* size adjust karen */
+  max-width: 153px;
+  width: 100%;
+  gap: 8px;
+  height: auto;
+  margin: 10px;
+
+  cursor: pointer;
+  border-radius: 14px;
+  border: 1px solid var(--gray-100);
+  background: var(--secondary-color);
   display: flex;
   align-items: center;
-  background: var(--secondary-color);
-  border: 1px solid var(--gray-100);
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
   transition: all 0.2s ease;
-  gap: 12px;
 }
 
 .photographer-item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   border-color: var(--primary-color);
 }
 
-.photographer-avatar {
-  width: 50px;
-  height: 50px;
+/* .photographer-avatar {
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--gray-100);
@@ -195,7 +200,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
+} */
 
 /* No Results */
 .no-results {

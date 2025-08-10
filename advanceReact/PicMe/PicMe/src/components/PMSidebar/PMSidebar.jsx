@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaStar } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import ArrowBackIcon from "../../assets/icons/ArrowBackIcon";
 import PMButton from "../PMButton/PMButton";
 import PMPhotographerProfile from "../PMPhotographerProfile/PMPhotographerProfile";
@@ -8,6 +8,8 @@ import { getAccessToken, removeAccessToken } from "../../utils/localStorage";
 import "./PMSidebarStyle.css";
 import PMInput from "../PMInput/PMInput";
 import CheckIcon from "../../assets/icons/CheckIcon";
+import { useNavigate } from "react-router-dom";
+
 const photographerTypes = [
   "Wedding Photographer",
   "Street Photographer",
@@ -18,116 +20,100 @@ const photographerTypes = [
 
 const PMSidebar = ({ searchData, onBack }) => {
   const [photographers, setPhotographers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // changed to false initially like second component
   const [error, setError] = useState(null);
   const [selectedPhotographer, setSelectedPhotographer] = useState(null);
   const [selectedType, setSelectedType] = useState("Street Photographer");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Fetch photographers when component mounts
+  // Process API response when searchData changes
   useEffect(() => {
-    fetchPhotographers();
-  }, []);
+    if (searchData && searchData.apiResponse) {
+      processPhotographersData(searchData.apiResponse);
+    } else {
+      // Optional: If no searchData, maybe fetch default photographers or clear list
+      setPhotographers([]);
+    }
+  }, [searchData]);
 
-  const fetchPhotographers = async () => {
+  // Transform and set photographers based on API response shape
+  const processPhotographersData = (apiResponse) => {
     try {
-      setLoading(true);
-      setError(null);
+      let photographersList = [];
 
-      // Check if token exists
-      const token = await getAccessToken();
-      if (!token) {
-        setError("Token not found. Please login again.");
-        setLoading(false);
-        return;
-      }
-
-      // Call your backend API
-      const response = await getApiWithAuth(
-        `/photographers?search=${encodeURIComponent(
-          searchData.photographerName
-        )}&from_date=${searchData.fromDate}&to_date=${searchData.toDate}`
-      );
-
-      if (response.success) {
-        // Handle successful response
-        const photographersList =
-          response.data.photographers || response.data || [];
-        setPhotographers(photographersList);
+      if (Array.isArray(apiResponse)) {
+        photographersList = apiResponse;
+      } else if (apiResponse.data && Array.isArray(apiResponse.data)) {
+        photographersList = apiResponse.data;
+      } else if (
+        apiResponse.photographers &&
+        Array.isArray(apiResponse.photographers)
+      ) {
+        photographersList = apiResponse.photographers;
       } else {
-        // Handle API error
-        if (
-          response.data?.message?.includes("Token not found") ||
-          response.data?.error?.includes("Unauthorized")
-        ) {
-          setError("Session expired. Please login again.");
-          await removeAccessToken();
-          // In real app, redirect to login
-        } else {
-          setError(response.data?.message || "Failed to fetch photographers");
-        }
-
-        // Fallback to mock data for demo
-        setPhotographers([
-          {
-            id: 1,
-            name: "Sarah Johnson",
-            type: "Wedding Photographer",
-            rating: 4.8,
-            totalReviews: 120,
-            avatar:
-              "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-          },
-          {
-            id: 2,
-            name: "Michael Chen",
-            type: "Street Photographer",
-            rating: 4.9,
-            totalReviews: 85,
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-          },
-          {
-            id: 3,
-            name: "Emma Rodriguez",
-            type: "Birthday Photographer",
-            rating: 4.7,
-            totalReviews: 95,
-            avatar:
-              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-          },
-        ]);
+        photographersList = [];
       }
-    } catch (err) {
-      console.error("API Error:", err);
-      setError("Network error. Please check your connection.");
 
-      // Fallback to mock data
-      setPhotographers([
-        {
-          id: 1,
-          name: "Sarah Johnson",
-          type: "Wedding Photographer",
-          rating: 4.8,
-          totalReviews: 120,
-          avatar:
-            "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-        },
-      ]);
-    } finally {
+      const transformedPhotographers = photographersList.map((item) => {
+        if (item.photographer) {
+          return {
+            id: item.photographer.id,
+            name: item.photographer.name,
+            type: item.photographer.category || "Photographer",
+            rating: parseFloat(item.photographer.average_rating || 4.5),
+            totalReviews: item.photographer.total_reviews || 0,
+            avatar:
+              item.photographer.avatar_url || item.photographer.profile_image,
+            isAvailable: item.is_available,
+            location: item.photographer.address,
+            experience: item.photographer.experience,
+            priceRange: item.photographer.price_range,
+          };
+        } else {
+          return {
+            id: item.id,
+            name: item.name,
+            type: item.category || item.type || "Photographer",
+            rating: parseFloat(item.average_rating || item.rating || 4.5),
+            totalReviews: item.total_reviews || item.reviews_count || 0,
+            avatar: item.avatar_url || item.profile_image || item.avatar,
+            isAvailable: item.is_available !== false,
+            location: item.address || item.location,
+            experience: item.experience,
+            priceRange: item.price_range,
+          };
+        }
+      });
+
+      setPhotographers(transformedPhotographers);
+      setLoading(false);
+      setError(null);
+    } catch (err) {
+      console.error("Error processing photographers data:", err);
+      setError("Failed to process photographers data");
+      setPhotographers([]);
       setLoading(false);
     }
   };
 
+  // You can decide to fetch photographers again or call onBack on retry.
   const handleRetry = () => {
-    fetchPhotographers();
+    setError(null);
+    setLoading(true);
+    if (onBack) {
+      onBack(); // or you can call fetchPhotographers() if you keep that function
+    }
   };
 
   const handlePhotographerClick = (photographer) => {
     setSelectedPhotographer(photographer);
+    navigate(`/photographer-profile/${photographer.id}`, {
+      state: { photographer },
+    });
   };
 
-  // If photographer is selected, show profile
+  // If photographer selected, show profile view
   if (selectedPhotographer) {
     return (
       <div className="photographers-container sidebar-position">
@@ -205,9 +191,10 @@ const PMSidebar = ({ searchData, onBack }) => {
       {/* Search Info */}
       <div className="search-info">
         <p className="para para2">
-          Searching for: <strong>{searchData.photographerName}</strong>
+          Searching for:{" "}
+          <strong>{searchData?.photographerName || "All Photographers"}</strong>
         </p>
-        {searchData.fromDate && (
+        {searchData?.fromDate && (
           <p className="para para2">
             From: {searchData.fromDate}{" "}
             {searchData.toDate && `to ${searchData.toDate}`}
@@ -215,7 +202,7 @@ const PMSidebar = ({ searchData, onBack }) => {
         )}
       </div>
 
-      {/* Photographer Results Section (Fixed Height to prevent jump) */}
+      {/* Photographer Results Section */}
       <div className="photographers-section">
         {loading ? (
           <div className="loading-container">
@@ -233,7 +220,7 @@ const PMSidebar = ({ searchData, onBack }) => {
             </div>
           </div>
         ) : (
-          <div className="photographers-results">
+          <>
             <p className="results-count">
               Found {photographers.length} photographer
               {photographers.length !== 1 ? "s" : ""}
@@ -242,15 +229,21 @@ const PMSidebar = ({ searchData, onBack }) => {
             {photographers.length > 0 ? (
               <div className="photographers-list">
                 {photographers.map((photographer) => (
-                  <PMPhotographerProfile
+                  <div
                     key={photographer.id}
-                    name={photographer.name}
-                    type={photographer.type}
-                    rating={photographer.rating}
-                    totalReviews={photographer.totalReviews}
-                    showButtons={false}
+                    className="photographer-item"
                     onClick={() => handlePhotographerClick(photographer)}
-                  />
+                  >
+                    <PMPhotographerProfile
+                      name={photographer.name}
+                      type={photographer.type}
+                      rating={photographer.rating}
+                      totalReviews={photographer.totalReviews}
+                      showButtons={false}
+                      compact={true} // compact mode enabled
+                      image={photographer.avatar}
+                    />
+                  </div>
                 ))}
               </div>
             ) : (
@@ -262,7 +255,7 @@ const PMSidebar = ({ searchData, onBack }) => {
                 </p>
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>

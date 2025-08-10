@@ -12,46 +12,34 @@ const PMPhotographerProfile = ({
   type,
   rating,
   totalReviews,
-  showButtons = true, // default true
+  showButtons = true,
+  compact = false, // new prop
 }) => {
   const profileImage = image ? image : DefaultAvatar;
 
   return (
-    <div className="profile-wrapper">
+    <div className={`profile-wrapper ${compact ? "compact" : ""}`}>
       <img
         className="profile-photo"
         src={profileImage}
         alt={`${name} not found`}
+        style={compact ? { width: 45, height: 45 } : {}}
       />
       <div className="profile-info">
-        <h1 className="auth-text2">{name}</h1>
-        <p className="para-main">{type}</p>
+        <h1 className={`auth-text2 ${compact ? "compact-name" : ""}`}>
+          {name}
+        </h1>
+        <p className={`para-main ${compact ? "compact-type" : ""}`}>{type}</p>
 
-        <div className="profile-reviews">
+        <div className={`profile-reviews ${compact ? "compact-reviews" : ""}`}>
           <span className="star">⭐</span>
           <span className="rating1">{rating}</span>
           <span className="para-reviews">({totalReviews} reviews)</span>
         </div>
       </div>
 
-      {/* Conditionally show buttons */}
-      {showButtons && (
-        <div className="profile-btn">
-          <PMButton varient="fill">
-            <NavLink to="/" className="nav-link">
-              <span className="span3">
-                <AvatarPorfolioIcon /> Portfolio
-              </span>
-            </NavLink>
-          </PMButton>
-          <PMButton varient="outline">
-            <NavLink to="/checkout" className="nav-link">
-              <span className="span4 ">
-                <PackagesIcon /> Package
-              </span>
-            </NavLink>
-          </PMButton>
-        </div>
+      {showButtons && !compact && (
+        <div className="profile-btn">{/* buttons here */}</div>
       )}
     </div>
   );
