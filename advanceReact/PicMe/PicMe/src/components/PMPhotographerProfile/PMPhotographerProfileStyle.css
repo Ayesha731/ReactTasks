@@ -69,6 +69,7 @@
 }
 
 /* FIXED BUTTON CONTAINER - EXACTLY 325px MAX WITH 154px BUTTONS */
+
 .profile-btn {
   display: flex;
   justify-content: space-between;
@@ -95,27 +96,6 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-}
-
-/* Custom profile buttons for photographer profile screen */
-.custom-profile-buttons {
-  width: 100%;
-  max-width: 325px;
-  display: flex;
-  justify-content: space-between;
-  gap: 17px;
-}
-
-.custom-profile-buttons .btn {
-  width: 154px;
-  max-width: 154px;
-  min-width: 154px;
-}
-
-.custom-profile-buttons .btn button {
-  width: 154px !important;
-  max-width: 154px !important;
-  min-width: 154px !important;
 }
 
 .profile-wrapper.compact {

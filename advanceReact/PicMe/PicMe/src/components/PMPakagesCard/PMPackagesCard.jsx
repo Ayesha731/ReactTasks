@@ -7,7 +7,7 @@ import { Colors } from "../../constants/Colors";
 import PMButton from "../PMButton/PMButton";
 import { NavLink } from "react-router-dom";
 
-const PMPackagesCard = ({ type }) => {
+const PMPackagesCard = ({ type, className }) => {
   const packageData = {
     Basic: {
       color: Colors.basicCardColor,
@@ -37,7 +37,7 @@ const PMPackagesCard = ({ type }) => {
 
   return (
     <div
-      className="card-wrapper"
+      className={`card-wrapper ${className || ""}`}
       style={{ backgroundColor: selectedPackage.color }}
     >
       {/* Icon */}

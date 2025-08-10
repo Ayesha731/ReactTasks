@@ -5,6 +5,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import PackagesIcon from "../../assets/icons/PackagesIcon";
 import AvatarPorfolioIcon from "../../assets/icons/AvatarPortfolioIcon";
 import DefaultAvatar from "../../assets/images/avatar.png"; // fallback image
+import ProfileMenuIcon from "../../assets/icons/ProfileMenuIcon";
 
 const PMPhotographerProfile = ({
   image,
@@ -59,35 +60,15 @@ const PMPhotographerProfile = ({
       </div>
 
       {/* Show custom buttons for photographer profile screen */}
-      {showCustomButtons && !compact && (
-        <div className="profile-btn custom-profile-buttons">
-          <PMButton varient="outline" onClick={handlePortfolioClick}>
-            <span className="span3">
-              <AvatarPorfolioIcon /> Portfolio
-            </span>
-          </PMButton>
-          <PMButton varient="outline" onClick={handlePackageClick}>
-            <span className="span4">
-              <PackagesIcon /> Package
-            </span>
-          </PMButton>
-        </div>
-      )}
-
-      {/* Show default buttons for other screens */}
-      {showButtons && !compact && !showCustomButtons && (
+      {showButtons && !compact && (
         <div className="profile-btn">
-          <PMButton varient="fill">
-            <NavLink to={`/photographer/portfolio/${id}`} className="nav-link">
-              <span className="span3">
-                <AvatarPorfolioIcon /> Portfolio
-              </span>
-            </NavLink>
+          <PMButton varient="fill" onClick={handlePortfolioClick}>
+            <AvatarPorfolioIcon className="btn-icon" />
+            <span className="span3">Portfolio</span>
           </PMButton>
           <PMButton varient="outline" onClick={handlePackageClick}>
-            <span className="span4">
-              <PackagesIcon /> Package
-            </span>
+            <PackagesIcon className="btn-icon" />
+            <span className="span4">Package</span>
           </PMButton>
         </div>
       )}

@@ -189,8 +189,7 @@ const PhotographerProfileScreen = () => {
             type={photographerData?.work_list?.[0]?.work_type || "Photographer"}
             rating={photographerData?.average_rating || 4.0}
             totalReviews={photographerData?.total_reviews || 0}
-            showButtons={false} // Hide default buttons
-            showCustomButtons={true} // Show custom buttons
+            showButtons={true} // Hide default buttons
             onPortfolioClick={handlePortfolioClick}
             onPackageClick={handlePackageClick}
           />

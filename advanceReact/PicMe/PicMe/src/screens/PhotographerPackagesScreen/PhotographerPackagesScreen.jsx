@@ -19,22 +19,15 @@ const PhotographerPackagesScreen = () => {
     <div>
       <PMNavbar />
       <PMMainHeroSection>
-        <div className="packages-screen-wrapper">
-          <h1 className="auth-text2">Choose Package</h1>
-          <p className="para-main">
-            Select the perfect package for your photography needs
-          </p>
-
-          <div className="packages-container">
-            <div onClick={() => handlePackageSelect("Basic")}>
-              <PMPackagesCard type="Basic" />
-            </div>
-            <div onClick={() => handlePackageSelect("Essential")}>
-              <PMPackagesCard type="Essential" />
-            </div>
-            <div onClick={() => handlePackageSelect("Premium")}>
-              <PMPackagesCard type="Premium" />
-            </div>
+        <div>
+          <div onClick={() => handlePackageSelect("Basic")}>
+            <PMPackagesCard type="Basic" />
+          </div>
+          <div onClick={() => handlePackageSelect("Essential")}>
+            <PMPackagesCard type="Essential" />
+          </div>
+          <div onClick={() => handlePackageSelect("Premium")}>
+            <PMPackagesCard type="Premium" />
           </div>
         </div>
       </PMMainHeroSection>
