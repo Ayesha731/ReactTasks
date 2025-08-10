@@ -1,7 +1,7 @@
 import React from "react";
 import "./PMPhotographerProfileStyle.css";
 import PMButton from "../PMButton/PMButton";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import PackagesIcon from "../../assets/icons/PackagesIcon";
 import AvatarPorfolioIcon from "../../assets/icons/AvatarPortfolioIcon";
 import DefaultAvatar from "../../assets/images/avatar.png"; // fallback image
@@ -12,10 +12,23 @@ const PMPhotographerProfile = ({
   type,
   rating,
   totalReviews,
-  showButtons = true,
-  compact = false, // new prop
+  showButtons = true, // default true
+  compact = false,
+  onPackageClick, // new prop for custom package click handler
 }) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const profileImage = image ? image : DefaultAvatar;
+
+  const handlePackageClick = () => {
+    if (onPackageClick) {
+      onPackageClick();
+    } else {
+      // Default behavior - navigate to packages
+      navigate(`/photographer/${id}/packages`);
+    }
+  };
 
   return (
     <div className={`profile-wrapper ${compact ? "compact" : ""}`}>
@@ -38,8 +51,22 @@ const PMPhotographerProfile = ({
         </div>
       </div>
 
+      {/* Conditionally show buttons */}
       {showButtons && !compact && (
-        <div className="profile-btn">{/* buttons here */}</div>
+        <div className="profile-btn">
+          <PMButton varient="fill">
+            <NavLink to={`/photographer/portfolio/${id}`} className="nav-link">
+              <span className="span3">
+                <AvatarPorfolioIcon /> Portfolio
+              </span>
+            </NavLink>
+          </PMButton>
+          <PMButton varient="outline" onClick={handlePackageClick}>
+            <span className="span4">
+              <PackagesIcon /> Package
+            </span>
+          </PMButton>
+        </div>
       )}
     </div>
   );

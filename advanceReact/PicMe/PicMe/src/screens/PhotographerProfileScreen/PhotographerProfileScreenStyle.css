@@ -1,9 +1,16 @@
+.profile-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .porfile-upper-section {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: center;
   align-items: center;
   height: 45%;
-
+  border: 2px solid green;
   padding-top: 20px;
 }
 .porfile-lower-section {
@@ -13,4 +20,8 @@
   align-items: center;
   height: 55%;
   border: 2px solid orangered;
+}
+.custom-buttons-container {
+  display: flex;
+  gap: 20px;
 }

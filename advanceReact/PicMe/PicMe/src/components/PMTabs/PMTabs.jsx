@@ -1,8 +1,5 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { FaRegImages } from "react-icons/fa"; // Photos icon
-import { FaRegPlayCircle } from "react-icons/fa"; // Videos icon
-import { FaRegCommentDots } from "react-icons/fa"; // Reviews icon
 import "./PMTabsStyle.css";
 
 const PMTabs = ({
@@ -10,6 +7,7 @@ const PMTabs = ({
   setActiveTab,
   selectedCategory,
   setSelectedCategory,
+  categories = ["all"], // Default categories array
 }) => {
   return (
     <div className="tabs-wrapper">
@@ -43,10 +41,11 @@ const PMTabs = ({
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
-          <option value="all">CATEGORY TYPE</option>
-          <option value="wedding">Wedding</option>
-          <option value="birthday">Birthday</option>
-          <option value="event">Event</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category === "all" ? "CATEGORY TYPE" : category.toUpperCase()}
+            </option>
+          ))}
         </select>
       </div>
     </div>
