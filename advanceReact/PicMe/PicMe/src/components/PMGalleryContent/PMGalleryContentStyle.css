@@ -29,6 +29,11 @@
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.02);
 }
 
 .play-icon {
@@ -36,16 +41,25 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px solid white;
+  /* backdrop-filter: blur(4px); */
+  transition: all 0.3s ease;
+}
+
+.play-icon:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-icon svg {
+  margin-left: 2px; /* Slight offset to center the play triangle */
 }
 
 /* FIXED 3x2 grid layout for reviews - NO responsive changes */
@@ -68,6 +82,12 @@
   gap: 8px;
   height: 100%;
   box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .review-avatar {
@@ -75,12 +95,18 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .review-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+}
+
+.review-user-info {
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
 }
 
 .review-user-info h4 {
@@ -88,23 +114,36 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--black-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .review-rating {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .review-rating .stars {
   font-size: 12px;
+  display: flex;
+  gap: 1px;
+}
+
+.review-rating .stars .filled {
   color: var(--yellow);
+}
+
+.review-rating .stars span:not(.filled) {
+  color: var(--gray-100);
 }
 
 .review-time {
   font-size: 12px;
   color: var(--gray-300);
+  flex-shrink: 0;
 }
 
 .review-text {
@@ -119,23 +158,13 @@
   flex: 1;
 }
 
-/* Fixed profile name styling */
-.profile-info h1 {
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.2;
-  max-width: 250px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
 /* Packages grid for when showing packages */
 .packages-content {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 400px;
+  width: 100%;
 }
 
 .packages-grid {
@@ -158,3 +187,4 @@
 }
 
 /* Remove all responsive behavior - keep fixed layout */
+/* No media queries to maintain fixed grid sizes */

@@ -6,7 +6,6 @@
   max-width: 325px;
   width: 100%;
   height: 324px;
-
   box-sizing: border-box;
 }
 
@@ -22,6 +21,31 @@
   flex-direction: column;
   align-items: center;
   gap: 3px;
+  text-align: center; /* Ensure text stays centered */
+  width: 100%;
+  max-width: 280px; /* Prevent overflow */
+}
+
+/* Fix for long names - prevent line breaks */
+.profile-info h1 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevent line breaks */
+  word-break: break-word;
+}
+
+/* For very long names, allow 2 lines max */
+.profile-info h1.allow-wrap {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-reviews {
@@ -44,34 +68,58 @@
   line-height: 1;
 }
 
+/* FIXED BUTTON CONTAINER - EXACTLY 325px MAX WITH 154px BUTTONS */
 .profile-btn {
   display: flex;
-  justify-content: center;
-
-  gap: 15px;
+  justify-content: space-between;
+  gap: 17px; /* 325 - (154*2) = 17px gap */
   width: 100%;
-  max-width: 325px;
+  max-width: 325px; /* FIXED MAX WIDTH */
   margin-top: 18px;
   box-sizing: border-box;
 }
 
 .profile-btn .btn {
-  width: 100%;
+  width: 154px; /* FIXED WIDTH FOR EACH BUTTON */
   max-width: 154px;
+  min-width: 154px;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .profile-btn .btn button {
-  width: 100% !important;
+  width: 154px !important; /* FORCE EXACT WIDTH */
   max-width: 154px !important;
-  min-width: unset !important; /* Remove min-width (200px issue) */
+  min-width: 154px !important;
   padding: 12px 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Custom profile buttons for photographer profile screen */
+.custom-profile-buttons {
+  width: 100%;
+  max-width: 325px;
+  display: flex;
+  justify-content: space-between;
+  gap: 17px;
+}
+
+.custom-profile-buttons .btn {
+  width: 154px;
+  max-width: 154px;
+  min-width: 154px;
+}
+
+.custom-profile-buttons .btn button {
+  width: 154px !important;
+  max-width: 154px !important;
+  min-width: 154px !important;
 }
 
 .profile-wrapper.compact {
-  max-width: 153px; /* chhota card width */
+  max-width: 153px;
   width: 100%;
   height: 184px;
   display: flex;

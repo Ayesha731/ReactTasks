@@ -12,9 +12,11 @@ const PMPhotographerProfile = ({
   type,
   rating,
   totalReviews,
-  showButtons = true, // default true
+  showButtons = true,
   compact = false,
-  onPackageClick, // new prop for custom package click handler
+  onPackageClick,
+  onPortfolioClick,
+  showCustomButtons = false, // New prop for custom buttons
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -25,8 +27,13 @@ const PMPhotographerProfile = ({
     if (onPackageClick) {
       onPackageClick();
     } else {
-      // Default behavior - navigate to packages
       navigate(`/photographer/${id}/packages`);
+    }
+  };
+
+  const handlePortfolioClick = () => {
+    if (onPortfolioClick) {
+      onPortfolioClick();
     }
   };
 
@@ -51,8 +58,24 @@ const PMPhotographerProfile = ({
         </div>
       </div>
 
-      {/* Conditionally show buttons */}
-      {showButtons && !compact && (
+      {/* Show custom buttons for photographer profile screen */}
+      {showCustomButtons && !compact && (
+        <div className="profile-btn custom-profile-buttons">
+          <PMButton varient="outline" onClick={handlePortfolioClick}>
+            <span className="span3">
+              <AvatarPorfolioIcon /> Portfolio
+            </span>
+          </PMButton>
+          <PMButton varient="outline" onClick={handlePackageClick}>
+            <span className="span4">
+              <PackagesIcon /> Package
+            </span>
+          </PMButton>
+        </div>
+      )}
+
+      {/* Show default buttons for other screens */}
+      {showButtons && !compact && !showCustomButtons && (
         <div className="profile-btn">
           <PMButton varient="fill">
             <NavLink to={`/photographer/portfolio/${id}`} className="nav-link">

@@ -11,16 +11,11 @@ import ShowLocationScreen from "./screens/ShowLocationScreen/ShowLocationScreen"
 import PMProtectedRoute from "./components/PMProtectedRoute/PMProtectedRoute";
 import PMPublicRoute from "./components/PMPublicRoute/PMPublicRoute";
 
-// Import the new child components
-
 // Import other existing screens
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 import MessageScreen from "./screens/MessagesScreen/MessageScreen";
 import CheckoutScreen from "./screens/CheckoutScreen/CheckoutScreen";
 import PMNotFound from "./components/PMNotFound/PMNotFound";
-import PhotosPage from "./pages/PhotoPage/PhotoPage";
-import VideosPage from "./pages/VideoPage/VideoPage";
-import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 import PhotographerProfileScreen from "./screens/PhotographerProfileScreen/PhotographerProfileScreen";
 import PhotographerPackagesScreen from "./screens/PhotographerPackagesScreen/PhotographerPackagesScreen";
 
@@ -72,7 +67,7 @@ const App = () => {
           }
         />
 
-        {/* Photographer Portfolio with nested routes */}
+        {/* Photographer Profile Routes */}
         <Route
           path="/photographer-profile/:id"
           element={
@@ -90,14 +85,17 @@ const App = () => {
             </PMProtectedRoute>
           }
         />
+
+        {/* Standalone Packages Route */}
         <Route
-          path="/photgrapher-packages"
+          path="/photographer-packages/:id"
           element={
             <PMProtectedRoute>
               <PhotographerPackagesScreen />
             </PMProtectedRoute>
           }
         />
+
         <Route
           path="/chat"
           element={

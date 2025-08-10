@@ -6,9 +6,6 @@ import PMPhotographerProfile from "../../components/PMPhotographerProfile/PMPhot
 import PMTabs from "../../components/PMTabs/PMTabs";
 import PMGalleryContent from "../../components/PMGalleryContent/PMGalleryContent";
 import PMLoadingSpinner from "../../components/PMLoadingSpinner/PMLoadingSpinner";
-import PMButton from "../../components/PMButton/PMButton";
-import PackageIcon from "../../assets/icons/PackagesIcon";
-import PortfolioIcon from "../../assets/icons/ProfileMenuIcon";
 import { getApiWithAuth } from "../../api/api";
 import { SEARCH_PHOTOGRAPHER_BY_ID_URL } from "../../api/apiUrls";
 import "./PhotographerProfileScreenStyle.css";
@@ -72,6 +69,7 @@ const PhotographerProfileScreen = () => {
   // Handle Portfolio button click
   const handlePortfolioClick = () => {
     setViewMode("portfolio");
+    setActiveTab("photos"); // Reset to photos when switching to portfolio
   };
 
   // Handle package button click
@@ -140,69 +138,20 @@ const PhotographerProfileScreen = () => {
         id: review.id || Math.random(),
         user: review.reviewer_name || review.user || "Anonymous",
         text: review.comment || review.text || "No comment provided",
+        avatar: review.avatar || null,
+        rating: review.rating || 5,
+        time: review.time || "2d ago",
       }));
     }
 
-    // Fallback dummy reviews if no real data
-    return [
-      {
-        id: 1,
-        user: "Sarah K.",
-        text: "Amazing photographer! Captured every moment perfectly ⭐⭐⭐⭐⭐",
-      },
-      {
-        id: 2,
-        user: "Mike R.",
-        text: "Great experience. Highly recommend for weddings!",
-      },
-      {
-        id: 3,
-        user: "Lisa M.",
-        text: "Professional and creative. Love the results!",
-      },
-      {
-        id: 4,
-        user: "John D.",
-        text: "Excellent work and very responsive communication.",
-      },
-      {
-        id: 5,
-        user: "Anna T.",
-        text: "Beautiful photos and great value for money.",
-      },
-      {
-        id: 6,
-        user: "David L.",
-        text: "Will definitely book again for future events!",
-      },
-    ];
+    // Return empty array - let PMGalleryContent handle fallback
+    return [];
   };
 
   // Prepare data for PMGalleryContent
   const photos = getFilteredPhotos();
   const videos = getFilteredVideos();
   const reviews = getReviews();
-
-  // Add fallback photos if no real data
-  const fallbackPhotos = [
-    "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop",
-  ];
-
-  const fallbackVideos = [
-    "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1478720568477-b936bb81b2a8?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=300&fit=crop",
-  ];
-
-  // Use real data if available, otherwise fallback
-  const finalPhotos = photos.length > 0 ? photos : fallbackPhotos;
-  const finalVideos = videos.length > 0 ? videos : fallbackVideos;
 
   if (loading) {
     return <PMLoadingSpinner text="Loading photographer details..." />;
@@ -240,43 +189,30 @@ const PhotographerProfileScreen = () => {
             type={photographerData?.work_list?.[0]?.work_type || "Photographer"}
             rating={photographerData?.average_rating || 4.0}
             totalReviews={photographerData?.total_reviews || 0}
-            showButtons={false} // Hide default buttons, we'll add custom ones
+            showButtons={false} // Hide default buttons
+            showCustomButtons={true} // Show custom buttons
+            onPortfolioClick={handlePortfolioClick}
+            onPackageClick={handlePackageClick}
           />
-
-          {/* Custom Portfolio and Package buttons */}
-          <div className="custom-buttons-container">
-            <PMButton
-              varient={viewMode === "portfolio" ? "fill" : "outline"}
-              onClick={handlePortfolioClick}
-            >
-              <PortfolioIcon />
-              <span>Portfolio</span>
-            </PMButton>
-            <PMButton
-              varient={viewMode === "packages" ? "fill" : "outline"}
-              onClick={handlePackageClick}
-            >
-              <PackageIcon />
-              <span>Package</span>
-            </PMButton>
-          </div>
         </div>
+
         <div className="porfile-lower-section">
+          {/* Only show tabs when in portfolio mode */}
           {viewMode === "portfolio" && (
-            <>
-              <PMTabs
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                categories={categories}
-              />
-            </>
+            <PMTabs
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              categories={categories}
+            />
           )}
+
+          {/* Gallery Content with view mode */}
           <PMGalleryContent
             activeTab={activeTab}
-            photos={finalPhotos}
-            videos={finalVideos}
+            photos={photos}
+            videos={videos}
             reviews={reviews}
             selectedCategory={selectedCategory}
             viewMode={viewMode}
