@@ -7,12 +7,11 @@ import PMTabs from "../../components/PMTabs/PMTabs";
 import PMGalleryContent from "../../components/PMGalleryContent/PMGalleryContent";
 import PMLoadingSpinner from "../../components/PMLoadingSpinner/PMLoadingSpinner";
 import PMButton from "../../components/PMButton/PMButton";
-
+import PackageIcon from "../../assets/icons/PackagesIcon";
+import PortfolioIcon from "../../assets/icons/ProfileMenuIcon";
 import { getApiWithAuth } from "../../api/api";
 import { SEARCH_PHOTOGRAPHER_BY_ID_URL } from "../../api/apiUrls";
 import "./PhotographerProfileScreenStyle.css";
-import ProfileMenuIcon from "../../assets/icons/ProfileMenuIcon";
-import PackagesIcon from "../../assets/icons/PackagesIcon";
 
 const PhotographerProfileScreen = () => {
   const { id } = useParams(); // Get photographer ID from URL
@@ -24,6 +23,7 @@ const PhotographerProfileScreen = () => {
   const [categories, setCategories] = useState(["all"]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [viewMode, setViewMode] = useState("portfolio"); // "portfolio" or "packages"
 
   useEffect(() => {
     const fetchPhotographerDetails = async () => {
@@ -69,9 +69,20 @@ const PhotographerProfileScreen = () => {
     }
   }, [id]);
 
+  // Handle Portfolio button click
+  const handlePortfolioClick = () => {
+    setViewMode("portfolio");
+  };
+
   // Handle package button click
   const handlePackageClick = () => {
-    navigate(`/photographer/${id}/packages`);
+    setViewMode("packages");
+  };
+
+  // Handle package selection
+  const handlePackageSelect = (packageType) => {
+    console.log(`Selected package: ${packageType} for photographer ${id}`);
+    navigate(`/checkout?photographerId=${id}&package=${packageType}`);
   };
 
   // Helper functions to extract data from API response
@@ -214,57 +225,63 @@ const PhotographerProfileScreen = () => {
   return (
     <div>
       <PMNavbar />
-
       <PMMainHeroSection>
-        <div className="profile-detail">
-          {" "}
-          <div className="porfile-upper-section">
-            <PMPhotographerProfile
-              image={
-                photographerData?.profile_image_url ||
-                photographerData?.avatar_url
-              }
-              name={
-                photographerData?.full_name ||
-                photographerData?.name ||
-                "Unknown Photographer"
-              }
-              type={
-                photographerData?.work_list?.[0]?.work_type || "Photographer"
-              }
-              rating={photographerData?.average_rating || 4.0}
-              totalReviews={photographerData?.total_reviews || 0}
-              showButtons={false} // Hide default buttons, we'll add custom ones
-            />
+        <div className="porfile-upper-section">
+          <PMPhotographerProfile
+            image={
+              photographerData?.profile_image_url ||
+              photographerData?.avatar_url
+            }
+            name={
+              photographerData?.full_name ||
+              photographerData?.name ||
+              "Unknown Photographer"
+            }
+            type={photographerData?.work_list?.[0]?.work_type || "Photographer"}
+            rating={photographerData?.average_rating || 4.0}
+            totalReviews={photographerData?.total_reviews || 0}
+            showButtons={false} // Hide default buttons, we'll add custom ones
+          />
 
-            {/* Custom Portfolio and Package buttons */}
-            <div className="custom-buttons-container">
-              <PMButton varient="fill">
-                <ProfileMenuIcon />
-                <span>Portfolio</span>
-              </PMButton>
-              <PMButton varient="outline" onClick={handlePackageClick}>
-                <PackagesIcon />
-                <span>Package</span>
-              </PMButton>
-            </div>
+          {/* Custom Portfolio and Package buttons */}
+          <div className="custom-buttons-container">
+            <PMButton
+              varient={viewMode === "portfolio" ? "fill" : "outline"}
+              onClick={handlePortfolioClick}
+            >
+              <PortfolioIcon />
+              <span>Portfolio</span>
+            </PMButton>
+            <PMButton
+              varient={viewMode === "packages" ? "fill" : "outline"}
+              onClick={handlePackageClick}
+            >
+              <PackageIcon />
+              <span>Package</span>
+            </PMButton>
           </div>
-          <div className="porfile-lower-section">
-            <PMTabs
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              categories={categories}
-            />
-            <PMGalleryContent
-              activeTab={activeTab}
-              photos={finalPhotos}
-              videos={finalVideos}
-              reviews={reviews}
-              selectedCategory={selectedCategory}
-            />
-          </div>
+        </div>
+        <div className="porfile-lower-section">
+          {viewMode === "portfolio" && (
+            <>
+              <PMTabs
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                categories={categories}
+              />
+            </>
+          )}
+          <PMGalleryContent
+            activeTab={activeTab}
+            photos={finalPhotos}
+            videos={finalVideos}
+            reviews={reviews}
+            selectedCategory={selectedCategory}
+            viewMode={viewMode}
+            onPackageSelect={handlePackageSelect}
+          />
         </div>
       </PMMainHeroSection>
     </div>

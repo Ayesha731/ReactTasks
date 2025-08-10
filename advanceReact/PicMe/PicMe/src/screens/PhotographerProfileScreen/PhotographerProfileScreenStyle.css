@@ -1,27 +1,71 @@
-.profile-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 .porfile-upper-section {
   display: flex;
   flex-direction: column;
-  gap: 5px;
   justify-content: center;
   align-items: center;
   height: 45%;
-  border: 2px solid green;
   padding-top: 20px;
+  gap: 20px;
 }
+
 .porfile-lower-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 55%;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.custom-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 17px;
+  width: 100%;
+  max-width: 325px; /* Fixed max width */
+  margin-top: 18px;
+}
+
+.custom-buttons-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 154px; /* Fixed width per button */
+  min-width: 154px;
+  max-width: 154px;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 55%;
-  border: 2px solid orangered;
-}
-.custom-buttons-container {
-  display: flex;
+  height: 300px;
   gap: 20px;
+}
+
+.error-container p {
+  color: var(--red);
+  font-size: 16px;
+  text-align: center;
+}
+
+.error-container button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-container button:hover {
+  background: var(--primary-color-dark);
 }

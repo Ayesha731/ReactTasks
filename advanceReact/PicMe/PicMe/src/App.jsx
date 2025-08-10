@@ -22,6 +22,7 @@ import PhotosPage from "./pages/PhotoPage/PhotoPage";
 import VideosPage from "./pages/VideoPage/VideoPage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage";
 import PhotographerProfileScreen from "./screens/PhotographerProfileScreen/PhotographerProfileScreen";
+import PhotographerPackagesScreen from "./screens/PhotographerPackagesScreen/PhotographerPackagesScreen";
 
 const App = () => {
   return (
@@ -79,17 +80,21 @@ const App = () => {
               <PhotographerProfileScreen />
             </PMProtectedRoute>
           }
-        >
-          <Route index element={<PhotosPage />} />
-          <Route path="videos" element={<VideosPage />} />
-          <Route path="reviews" element={<ReviewsPage />} />
-        </Route>
+        />
 
         <Route
           path="/profile"
           element={
             <PMProtectedRoute>
               <ProfileScreen />
+            </PMProtectedRoute>
+          }
+        />
+        <Route
+          path="/photgrapher-packages"
+          element={
+            <PMProtectedRoute>
+              <PhotographerPackagesScreen />
             </PMProtectedRoute>
           }
         />

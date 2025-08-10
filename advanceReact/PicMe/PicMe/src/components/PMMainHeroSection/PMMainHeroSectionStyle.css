@@ -11,5 +11,5 @@
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid var(--border-color);
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
