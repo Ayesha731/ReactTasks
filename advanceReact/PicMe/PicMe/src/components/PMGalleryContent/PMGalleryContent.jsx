@@ -22,10 +22,10 @@ const PMGalleryContent = ({
     "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1478720568477-b936bb81b2a8?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=300&fit=crop",
   ];
 
   const fallbackVideos = [
@@ -51,7 +51,7 @@ const PMGalleryContent = ({
         "https://images.unsplash.com/photo-1494790108755-2616b6661ad4?w=100&h=100&fit=crop&crop=face",
       text: "Amazing photographer! Captured every moment perfectly.",
       rating: 5,
-      time: "10 Feb",
+      date: "10 Feb",
     },
     {
       id: 2,
@@ -60,7 +60,7 @@ const PMGalleryContent = ({
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       text: "Great experience working with this photographer.",
       rating: 5,
-      time: "10 Jan",
+      date: "10 Jan",
     },
   ];
 
@@ -127,29 +127,34 @@ const PMGalleryContent = ({
         return (
           <div className="reviews-grid">
             {displayReviews.slice(0, 6).map((review) => (
-              <div key={review.id} className="review-card">
-                <div className="review-header">
-                  <img
-                    src={review.avatar}
-                    alt={review.user}
-                    className="review-avatar"
-                  />
-                  <div className="review-user-info">
-                    <h4>{review.user}</h4>
-                    <div className="review-rating">
-                      {[...Array(5)].map((_, i) => (
-                        <span
-                          key={i}
-                          className={i < review.rating ? "filled" : ""}
-                        >
-                          ⭐
-                        </span>
-                      ))}
-                      <span className="review-time">{review.time}</span>
-                    </div>
+              <div key={review.id || review.user} className="review-card">
+                <img
+                  src={review.avatar}
+                  alt={review.user}
+                  className="review-avatar"
+                />
+
+                <div className="review-content">
+                  <div className="review-header">
+                    <h4 className="review-user-name">{review.user}</h4>
+                    <span className="review-time">
+                      {review.date || "Aug 11, 2025"}
+                    </span>
                   </div>
+
+                  <div className="review-rating">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={i < review.rating ? "filled" : ""}
+                      >
+                        ⭐
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="review-text">{review.text}</p>
                 </div>
-                <p className="review-text">{review.text}</p>
               </div>
             ))}
           </div>

@@ -10,7 +10,7 @@
   width: 100%;
   z-index: 10; /* Ensure it's above the map */
   padding: 2px;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .upper-map-search {
@@ -131,13 +131,14 @@
   flex: 1;
   color: var(--black-text);
 }
-
 /* Responsive Design */
+
 @media (max-width: 768px) {
   .map-search-bar {
     left: 50%;
-    top: 150px;
+    top: 100px;
     max-width: 320px;
+    transform: translateX(-50%);
   }
 
   .upper-map-search {
@@ -156,5 +157,41 @@
   .date-input {
     padding: 10px;
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-search-bar {
+    top: 90px;
+    max-width: 280px;
+  }
+
+  .search-row {
+    padding: 5px;
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .icon {
+    max-width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .map-search-bar {
+    top: 80px;
+    max-width: 250px;
+  }
+
+  .search-input {
+    font-size: 11px;
+  }
+
+  .date-input {
+    font-size: 11px;
+    padding: 8px;
   }
 }

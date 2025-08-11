@@ -1,14 +1,30 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import "./PMTabsStyle.css";
+import DropdownIcon from "../../assets/icons/DropdownIcon";
 
 const PMTabs = ({
   activeTab,
   setActiveTab,
   selectedCategory,
   setSelectedCategory,
-  categories = ["all"], // Default categories array
+  categories = ["all"],
+  viewMode = "portfolio", // "portfolio" or "packages"
 }) => {
+  // If in packages mode, only show Choose Package button
+  if (viewMode === "packages") {
+    return (
+      <div className="tabs-wrapper packages-only">
+        <div className="tabs-center">
+          <button className="tab-btn packages-tab active">
+            CHOOSE PACKAGE
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // If in portfolio mode, show all tabs + category dropdown
   return (
     <div className="tabs-wrapper">
       <div className="tabs-left">
@@ -31,22 +47,27 @@ const PMTabs = ({
           onClick={() => setActiveTab("reviews")}
         >
           REVIEWS
-          <FaChevronDown className="chevron" />
         </button>
       </div>
 
       <div className="tabs-right">
-        <select
-          className="category-dropdown"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category === "all" ? "CATEGORY TYPE" : category.toUpperCase()}
-            </option>
-          ))}
-        </select>
+        <div className="dropdown-wrapper">
+          <select
+            className={`category-dropdown ${
+              selectedCategory !== "all" ? "selected" : ""
+            }`}
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category === "all" ? "CATEGORY TYPE" : category.toUpperCase()}
+              </option>
+            ))}
+          </select>
+
+          <DropdownIcon className="dropdown-icon" />
+        </div>
       </div>
     </div>
   );

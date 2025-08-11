@@ -20,7 +20,7 @@ const PhotographerProfileScreen = () => {
   const [categories, setCategories] = useState(["all"]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [viewMode, setViewMode] = useState("portfolio"); // "portfolio" or "packages"
+  const [viewMode, setViewMode] = useState("packages"); // DEFAULT TO PACKAGES (Choose Package active)
 
   useEffect(() => {
     const fetchPhotographerDetails = async () => {
@@ -66,13 +66,13 @@ const PhotographerProfileScreen = () => {
     }
   }, [id]);
 
-  // Handle Portfolio button click
+  // Handle Portfolio button click - show PHOTOS, VIDEOS, REVIEWS tabs + CATEGORY
   const handlePortfolioClick = () => {
     setViewMode("portfolio");
     setActiveTab("photos"); // Reset to photos when switching to portfolio
   };
 
-  // Handle package button click
+  // Handle Package button click - show only Choose Package button
   const handlePackageClick = () => {
     setViewMode("packages");
   };
@@ -189,23 +189,22 @@ const PhotographerProfileScreen = () => {
             type={photographerData?.work_list?.[0]?.work_type || "Photographer"}
             rating={photographerData?.average_rating || 4.0}
             totalReviews={photographerData?.total_reviews || 0}
-            showButtons={true} // Hide default buttons
+            showButtons={true}
             onPortfolioClick={handlePortfolioClick}
             onPackageClick={handlePackageClick}
           />
         </div>
 
         <div className="porfile-lower-section">
-          {/* Only show tabs when in portfolio mode */}
-          {viewMode === "portfolio" && (
-            <PMTabs
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              categories={categories}
-            />
-          )}
+          {/* Always show PMTabs - it will decide what to show based on viewMode */}
+          <PMTabs
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            categories={categories}
+            viewMode={viewMode}
+          />
 
           {/* Gallery Content with view mode */}
           <PMGalleryContent
