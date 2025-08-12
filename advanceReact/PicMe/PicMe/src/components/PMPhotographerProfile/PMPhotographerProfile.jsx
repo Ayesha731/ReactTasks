@@ -35,6 +35,8 @@ const PMPhotographerProfile = ({
   const handlePortfolioClick = () => {
     if (onPortfolioClick) {
       onPortfolioClick();
+    } else {
+      navigate(`/photographer/${id}/profile`);
     }
   };
 

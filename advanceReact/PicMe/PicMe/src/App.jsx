@@ -5,8 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WelcomeScreen from "./screens/WelcomeScreen/WelcomeScreen";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen/SignUpScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen/ForgotPasswordScreen";
+import NewPasswordScreen from "./screens/NewPasswordScreen/NewPasswordScreen";
+import PasswordChangedScreen from "./screens/PasswordChangedScreen/PasswordChangedScreen";
 import ChooseLocationScreen from "./screens/ChooseLocationScreen/ChooseLocationScreen";
 import ShowLocationScreen from "./screens/ShowLocationScreen/ShowLocationScreen";
+import VerificationScreen from "./screens/VerificationScreen/VerificationScreen";
 // Your existing component
 import PMProtectedRoute from "./components/PMProtectedRoute/PMProtectedRoute";
 import PMPublicRoute from "./components/PMPublicRoute/PMPublicRoute";
@@ -52,18 +56,34 @@ const App = () => {
           }
         />
         <Route
-          path="/signup"
+          path="/forgot-password"
           element={
             <PMPublicRoute>
-              <SignUpScreen />
+              <ForgotPasswordScreen />
             </PMPublicRoute>
           }
         />
         <Route
-          path="/signup"
+          path="/new-password"
           element={
             <PMPublicRoute>
-              <SignUpScreen />
+              <NewPasswordScreen />
+            </PMPublicRoute>
+          }
+        />
+        <Route
+          path="/password-changed"
+          element={
+            <PMPublicRoute>
+              <PasswordChangedScreen />
+            </PMPublicRoute>
+          }
+        />
+        <Route
+          path="/verification"
+          element={
+            <PMPublicRoute>
+              <VerificationScreen />
             </PMPublicRoute>
           }
         />
