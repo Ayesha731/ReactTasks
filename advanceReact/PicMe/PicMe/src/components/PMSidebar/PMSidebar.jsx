@@ -158,7 +158,7 @@ const PMSidebar = ({ searchData, onBack }) => {
         <p className="para para2">
           Find the best photographers in your area for your next event!
         </p>
-        <div className="dropdown-wrapper">
+        <div className="dropdown-wrapper1">
           <div style={{ width: "100%" }}>
             <PMInput
               icon={<FaSearch />}
@@ -171,7 +171,7 @@ const PMSidebar = ({ searchData, onBack }) => {
           </div>
 
           {dropdownOpen && (
-            <ul className="dropdown-list">
+            <ul className="dropdown-list1">
               {photographerTypes.map((type) => (
                 <li
                   key={type}
