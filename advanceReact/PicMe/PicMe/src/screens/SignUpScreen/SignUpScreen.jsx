@@ -114,10 +114,10 @@ const SignUpScreen = () => {
           </PMButton>
 
           {/* FIXED DIVIDER - Same as login */}
-          <div className="divider-direct">
-            <div className="line1"></div>
-            <span className="text">OR</span>
-            <div className="line2"></div>
+          <div className="or-divider">
+            <div className="left-line"></div>
+            <span className="or-text">OR</span>
+            <div className="right-line"></div>
           </div>
 
           {/* Social Login Buttons */}

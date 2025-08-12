@@ -18,6 +18,9 @@ import CheckoutScreen from "./screens/CheckoutScreen/CheckoutScreen";
 import PMNotFound from "./components/PMNotFound/PMNotFound";
 import PhotographerProfileScreen from "./screens/PhotographerProfileScreen/PhotographerProfileScreen";
 import PhotographerPackagesScreen from "./screens/PhotographerPackagesScreen/PhotographerPackagesScreen";
+import ConfirmBookingScreen from "./screens/ConfirmBookingScreen/ConfirmBookingScreen";
+import ScheduleScreen from "./screens/ScheduleScreen/ScheduleScreen";
+import ReviewsScreen from "./screens/ReviewsScreen/ReviewsScreen";
 
 const App = () => {
   return (
@@ -109,6 +112,30 @@ const App = () => {
           element={
             <PMProtectedRoute>
               <CheckoutScreen />
+            </PMProtectedRoute>
+          }
+        />
+        <Route
+          path="/schedule"
+          element={
+            <PMProtectedRoute>
+              <ScheduleScreen />
+            </PMProtectedRoute>
+          }
+        />
+        <Route
+          path="/confirm"
+          element={
+            <PMProtectedRoute>
+              <ConfirmBookingScreen />
+            </PMProtectedRoute>
+          }
+        />
+        <Route
+          path="/reviews"
+          element={
+            <PMProtectedRoute>
+              <ReviewsScreen />
             </PMProtectedRoute>
           }
         />

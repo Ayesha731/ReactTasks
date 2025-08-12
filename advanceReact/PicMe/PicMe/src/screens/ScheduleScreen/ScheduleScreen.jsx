@@ -6,6 +6,7 @@ import PMDatePicker from "../../components/PMDatePicker/PMDatePicker";
 import PMPackagesCard from "../../components/PMPakagesCard/PMPackagesCard";
 import PMCustomerCard from "../../components/PMCustomerCard/PMCustomerCard";
 import PMButton from "../../components/PMButton/PMButton";
+import { NavLink } from "react-router-dom";
 const ScheduleScreen = () => {
   const [bookingFrom, setBookingFrom] = useState(null);
   const [bookingTo, setBookingTo] = useState(null);
@@ -41,12 +42,14 @@ const ScheduleScreen = () => {
                   bookingTo={bookingTo}
                   onDateChange={handleDateChange}
                 />
-                <PMButton
-                  varient="fill"
-                  onClick={() => console.log({ bookingFrom, bookingTo })}
-                >
-                  <span className="btn-text">Continue</span>
-                </PMButton>
+                <NavLink to={"/confirm"} className={"nav-link"}>
+                  <PMButton
+                    varient="fill"
+                    onClick={() => console.log({ bookingFrom, bookingTo })}
+                  >
+                    <span className="btn-text">Continue</span>
+                  </PMButton>
+                </NavLink>
               </div>
             </PMCustomerCard>
           </div>

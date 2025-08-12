@@ -30,7 +30,7 @@ const ConfirmBookingScreen = () => {
                   at <br /> 12:00 AM.
                 </p>
                 <PMButton varient="fill">
-                  <NavLink to="/messages" className={"nav-link"}>
+                  <NavLink to="/chat" className={"nav-link"}>
                     <span className="btn-text">Go To chat</span>
                   </NavLink>
                 </PMButton>

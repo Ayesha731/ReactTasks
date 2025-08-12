@@ -61,30 +61,40 @@
 }
 
 /* FIXED DIVIDER - SIMPLE AND WORKING */
-.divider {
+.or-divider {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 100%;
   max-width: 345px;
-  margin: 20px 0;
-  gap: 15px;
+  margin: 25px 0;
+  position: relative;
 }
 
-.divider .line {
+.or-divider .left-line {
   flex: 1;
-  height: 1px;
-  background-color: #2bafc7;
-  opacity: 0.4;
+  height: 2px;
+  background: linear-gradient(to left, transparent, var(--primary-color));
+  opacity: 0.6;
+}
+.or-divider .right-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary-color));
+  opacity: 0.6;
 }
 
-.divider .text {
+.or-divider .or-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 0 15px;
   font-size: 14px;
   font-weight: 500;
   color: #747688;
-  white-space: nowrap;
-  flex-shrink: 0;
-  padding: 0 5px;
+  letter-spacing: 0.5px;
+  z-index: 2;
 }
 
 /* Responsive */

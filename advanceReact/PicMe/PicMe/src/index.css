@@ -117,6 +117,9 @@
   text-transform: capitalize;
 }
 
+.span6 {
+  color: var(--primary-color);
+}
 .form {
   display: flex;
   flex-direction: column;

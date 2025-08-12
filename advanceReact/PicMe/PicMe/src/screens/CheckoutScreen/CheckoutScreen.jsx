@@ -8,6 +8,7 @@ import PMButton from "../../components/PMButton/PMButton";
 import PaypalIcon from "../../assets/icons/PaypalIcon";
 import MasterCardIcon from "../../assets/icons/MasterCardIcon";
 import VisaIcon from "../../assets/icons/VisaIcon";
+import { NavLink } from "react-router-dom";
 
 const CheckoutScreen = () => {
   const [selected, setSelected] = useState("mastercard");
@@ -67,10 +68,11 @@ const CheckoutScreen = () => {
                     </div>
                   ))}
                 </div>
-
-                <PMButton varient="fill" onClick={handleContinue}>
-                  <span className="btn-text">Continue</span>
-                </PMButton>
+                <NavLink to={"/schedule"} className={"nav-link"}>
+                  <PMButton varient="fill" onClick={handleContinue}>
+                    <span className="btn-text">Continue</span>
+                  </PMButton>
+                </NavLink>
               </div>
             </PMCustomerCard>
           </div>

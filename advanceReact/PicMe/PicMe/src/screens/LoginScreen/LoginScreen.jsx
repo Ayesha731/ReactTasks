@@ -140,7 +140,7 @@ const LoginScreen = () => {
               <span className="para">&nbsp;Remember Me</span>
             </div>
             <NavLink to="/forgot-password" className="nav-link">
-              <p className="para1 span1">Forgot Password?</p>
+              <p className="para1 span6">Forgot Password?</p>
             </NavLink>
           </div>
 
@@ -148,10 +148,10 @@ const LoginScreen = () => {
             <span className="btn-text">Sign in</span>
           </PMButton>
 
-          <div className="divider">
-            <span className="line"></span>
-            <span className="text">OR</span>
-            <span className="line"></span>
+          <div className="or-divider">
+            <div className="left-line"></div>
+            <span className="or-text">OR</span>
+            <div className="right-line"></div>
           </div>
 
           <PMButton varient="social" disabled={isSubmitting}>
