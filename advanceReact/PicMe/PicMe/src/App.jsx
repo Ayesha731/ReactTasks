@@ -51,6 +51,22 @@ const App = () => {
             </PMPublicRoute>
           }
         />
+        <Route
+          path="/signup"
+          element={
+            <PMPublicRoute>
+              <SignUpScreen />
+            </PMPublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PMPublicRoute>
+              <SignUpScreen />
+            </PMPublicRoute>
+          }
+        />
 
         {/* Protected Routes */}
         <Route
