@@ -9,6 +9,7 @@ import "./PMSidebarStyle.css";
 import PMInput from "../PMInput/PMInput";
 import CheckIcon from "../../assets/icons/CheckIcon";
 import { useNavigate } from "react-router-dom";
+import SearchIcon from "../../assets/icons/SearchIcon";
 
 const photographerTypes = [
   "Wedding Photographer",
@@ -159,9 +160,13 @@ const PMSidebar = ({ searchData, onBack }) => {
           Find the best photographers in your area for your next event!
         </p>
         <div className="dropdown-wrapper1">
-          <div style={{ width: "100%" }}>
+          <div
+            style={{
+              width: "100%",
+            }}
+          >
             <PMInput
-              icon={<FaSearch />}
+              icon={<SearchIcon />}
               placeholder="Search photographers"
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}

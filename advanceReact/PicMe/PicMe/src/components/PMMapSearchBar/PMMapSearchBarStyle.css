@@ -1,6 +1,6 @@
 .map-search-bar {
   position: absolute;
-  top: 20px; /* Adjust based on map position */
+  top: 20px; /* Fixed vertical position */
   left: 80%;
   transform: translateX(-50%);
   display: flex;
@@ -8,11 +8,11 @@
   gap: 12px;
   max-width: 413px;
   width: 100%;
-  z-index: 10; /* Ensure it's above the map */
+  z-index: 10;
   padding: 2px;
-  /* border: 2px solid red; */
 }
 
+/* Upper Search Row */
 .upper-map-search {
   display: flex;
   width: 100%;
@@ -45,7 +45,6 @@
   color: var(--gray-200);
 }
 
-/* Search Icon Button - Make it clickable */
 .search-icon-btn {
   cursor: pointer;
   transition: all 0.2s ease;
@@ -79,6 +78,7 @@
 
 .icon-btn:hover {
   background-color: var(--light-blue);
+  border: 2px solid var(--primary-color);
 }
 
 /* Lower part */
@@ -121,23 +121,29 @@
 
 .date-input:hover {
   background-color: var(--light-blue);
-}
-
-.search-icon-btn svg {
-  color: var(--gray-200);
+  border: 1px solid var(--primary-color);
 }
 
 .date-input span {
   flex: 1;
   color: var(--black-text);
 }
-/* Responsive Design */
 
+/* -------- RESPONSIVE -------- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .map-search-bar {
+    left: 70%;
+  }
+}
+
+/* Medium Screen */
 @media (max-width: 768px) {
   .map-search-bar {
-    left: 50%;
+    left: 60%;
     top: 100px;
-    max-width: 320px;
+    max-width: 350px;
     transform: translateX(-50%);
   }
 
@@ -160,10 +166,26 @@
   }
 }
 
+/* Small Screens */
+@media (max-width: 600px) {
+  .map-search-bar {
+    left: 50%;
+    max-width: 300px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 480px) {
   .map-search-bar {
-    top: 90px;
+    left: 45%;
     max-width: 280px;
+  }
+
+  /* Stack inputs vertically */
+  .upper-map-search,
+  .date-row {
+    /* flex-direction: column; */
+    gap: 10px;
   }
 
   .search-row {
@@ -180,9 +202,10 @@
   }
 }
 
+/* Extra Small Mobile */
 @media (max-width: 360px) {
   .map-search-bar {
-    top: 80px;
+    left: 40%;
     max-width: 250px;
   }
 

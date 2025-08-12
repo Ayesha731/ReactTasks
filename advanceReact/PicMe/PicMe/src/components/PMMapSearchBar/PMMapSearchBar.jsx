@@ -3,6 +3,7 @@ import "./PMMapSearchBarStyle.css";
 import ArrowBackIcon from "../../assets/icons/ArrowBackIcon";
 import DirectionIcon from "../../assets/icons/DirectionIcon";
 import CalendarIcon from "../../assets/icons/CalenderIcon";
+import SearchIcon from "../../assets/icons/SearchIcon";
 import { FaSearch } from "react-icons/fa";
 import { getApiWithAuth } from "../../api/api";
 import { SEARCH_PHOTOGRAPHER_URL } from "../../api/apiUrls";
@@ -104,7 +105,9 @@ const PMMapSearchBar = ({ onSearch }) => {
       <div className="lower-map-search">
         <div className="date-row">
           <div className="date-input">
-            <span>{fromDate ? formatDate(fromDate) : "From"}</span>
+            <span style={{ color: "#747688" }}>
+              {fromDate ? formatDate(fromDate) : "From"}
+            </span>
             <input
               type="date"
               value={fromDate}
@@ -118,7 +121,9 @@ const PMMapSearchBar = ({ onSearch }) => {
           </div>
 
           <div className="date-input">
-            <span>{toDate ? formatDate(toDate) : "To"}</span>
+            <span style={{ color: "#747688" }}>
+              {toDate ? formatDate(toDate) : "To"}
+            </span>
             <input
               type="date"
               value={toDate}
@@ -136,7 +141,7 @@ const PMMapSearchBar = ({ onSearch }) => {
             onClick={isLoading ? null : handleSearchClick}
             style={{ cursor: isLoading ? "not-allowed" : "pointer" }}
           >
-            <FaSearch color={isLoading ? "#888" : "inherit"} />
+            <SearchIcon />
           </div>
         </div>
       </div>

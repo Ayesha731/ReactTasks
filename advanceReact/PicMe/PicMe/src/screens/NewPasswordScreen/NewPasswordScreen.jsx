@@ -56,6 +56,7 @@ const NewPasswordScreen = () => {
             onBlur={handleBlur("password")}
             error={errors.password}
             touched={touched.password}
+            endIcon={<HiddenIcon />}
           />
 
           {/* Confirm Password */}
@@ -68,6 +69,7 @@ const NewPasswordScreen = () => {
             onBlur={handleBlur("confirmPassword")}
             error={errors.confirmPassword}
             touched={touched.confirmPassword}
+            endIcon={<HiddenIcon />}
           />
 
           {/* Hint */}

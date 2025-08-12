@@ -5,15 +5,8 @@
   background: var(--secondary-color);
   max-width: 325px;
   width: 100%;
-  height: 324px;
   box-sizing: border-box;
-}
-
-.profile-photo {
-  width: 132.52px;
-  height: 132.52px;
-  border-radius: 50%;
-  object-fit: cover;
+  padding: 15px; /* added padding */
 }
 
 .profile-info {
@@ -21,19 +14,17 @@
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  text-align: center; /* Ensure text stays centered */
+  text-align: center;
   width: 100%;
-  max-width: 280px; /* Prevent overflow */
+  max-width: 280px;
+  word-wrap: break-word;
 }
 
-/* For very long names, allow 2 lines max */
-.profile-info h1.allow-wrap {
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.profile-photo {
+  width: 132.52px;
+  height: 132.52px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile-reviews {

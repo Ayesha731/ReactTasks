@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import "./LoginScreenStyle.css";
 import MessageIcon from "../../assets/icons/MessageIcon";
 import PasswordIcon from "../../assets/icons/PasswordIcon";
+import HiddenIcon from "../../assets/icons/HiddenIcon";
 import PMButton from "../../components/PMButton/PMButton";
 import PMInput from "../../components/PMInput/PMInput";
 import PMLoadingSpinner from "../../components/PMLoadingSpinner/PMLoadingSpinner";
@@ -124,6 +125,7 @@ const LoginScreen = () => {
             onBlur={handleBlur("password")}
             error={errors.password}
             touched={touched.password}
+            endIcon={<HiddenIcon />}
           />
 
           <div className="remember-section">

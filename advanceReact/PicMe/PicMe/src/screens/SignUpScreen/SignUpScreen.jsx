@@ -14,6 +14,7 @@ import { postAPIWithoutAuth } from "../../api/api";
 import { removeAccessToken, setAccessToken } from "../../utils/localStorage";
 import { signupSchema } from "../../schemas";
 import { NavLink } from "react-router-dom";
+import HiddenIcon from "../../assets/icons/HiddenIcon";
 
 const initialValues = {
   name: "",
@@ -94,6 +95,7 @@ const SignUpScreen = () => {
             onBlur={handleBlur("password")}
             error={errors.password}
             touched={touched.password}
+            endIcon={<HiddenIcon />}
           />
 
           {/* Confirm Password */}
@@ -106,6 +108,7 @@ const SignUpScreen = () => {
             onBlur={handleBlur("confirmPassword")}
             error={errors.confirmPassword}
             touched={touched.confirmPassword}
+            endIcon={<HiddenIcon />}
           />
 
           {/* Button */}
