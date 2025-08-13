@@ -7,7 +7,10 @@ import PMTabs from "../../components/PMTabs/PMTabs";
 import PMGalleryContent from "../../components/PMGalleryContent/PMGalleryContent";
 import PMLoadingSpinner from "../../components/PMLoadingSpinner/PMLoadingSpinner";
 import { getApiWithAuth } from "../../api/api";
-import { SEARCH_PHOTOGRAPHER_BY_ID_URL } from "../../api/apiUrls";
+import {
+  SEARCH_PHOTOGRAPHER_BY_ID_URL,
+  GET_PHOTOGRAPHER_PACKAGES_URL,
+} from "../../api/apiUrls";
 import "./PhotographerProfileScreenStyle.css";
 
 const PhotographerProfileScreen = () => {
@@ -15,12 +18,14 @@ const PhotographerProfileScreen = () => {
   const navigate = useNavigate();
 
   const [photographerData, setPhotographerData] = useState(null);
+  const [packagesData, setPackagesData] = useState([]); // Add packages state
   const [activeTab, setActiveTab] = useState("photos");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [categories, setCategories] = useState(["all"]);
   const [loading, setLoading] = useState(true);
+  const [packagesLoading, setPackagesLoading] = useState(false); // Separate loading for packages
   const [error, setError] = useState(null);
-  const [viewMode, setViewMode] = useState("packages"); // DEFAULT TO PACKAGES (Choose Package active)
+  const [viewMode, setViewMode] = useState("packages"); // DEFAULT TO PACKAGES
 
   useEffect(() => {
     const fetchPhotographerDetails = async () => {
@@ -66,6 +71,35 @@ const PhotographerProfileScreen = () => {
     }
   }, [id]);
 
+  // Fetch packages when switching to packages view
+  const fetchPackages = async () => {
+    if (packagesData.length > 0) return; // Don't fetch again if already loaded
+
+    try {
+      setPackagesLoading(true);
+      console.log("Fetching packages for photographer ID:", id);
+
+      const response = await getApiWithAuth(
+        `${GET_PHOTOGRAPHER_PACKAGES_URL}/${id}/packages`
+      );
+
+      if (response.success) {
+        console.log("Packages data:", response.data);
+        setPackagesData(response.data.data || response.data || []);
+      } else {
+        console.error("Error fetching packages:", response.data);
+        // Don't set error here, just log it and show fallback packages
+        console.log("Using fallback packages due to API error");
+      }
+    } catch (error) {
+      console.error("Packages fetch error:", error);
+      // Don't set error here, just log it and show fallback packages
+      console.log("Using fallback packages due to network error");
+    } finally {
+      setPackagesLoading(false);
+    }
+  };
+
   // Handle Portfolio button click - show PHOTOS, VIDEOS, REVIEWS tabs + CATEGORY
   const handlePortfolioClick = () => {
     setViewMode("portfolio");
@@ -75,12 +109,18 @@ const PhotographerProfileScreen = () => {
   // Handle Package button click - show only Choose Package button
   const handlePackageClick = () => {
     setViewMode("packages");
+    fetchPackages(); // Fetch packages when switching to packages view
   };
 
   // Handle package selection
-  const handlePackageSelect = (packageType) => {
+  const handlePackageSelect = (packageType, packageId = null) => {
     console.log(`Selected package: ${packageType} for photographer ${id}`);
-    navigate(`/checkout?photographerId=${id}&package=${packageType}`);
+
+    // If we have a packageId from API, use it, otherwise use the type
+    const packageParam = packageId
+      ? `packageId=${packageId}`
+      : `package=${packageType}`;
+    navigate(`/checkout?photographerId=${id}&${packageParam}`);
   };
 
   // Helper functions to extract data from API response
@@ -206,16 +246,31 @@ const PhotographerProfileScreen = () => {
             viewMode={viewMode}
           />
 
-          {/* Gallery Content with view mode */}
-          <PMGalleryContent
-            activeTab={activeTab}
-            photos={photos}
-            videos={videos}
-            reviews={reviews}
-            selectedCategory={selectedCategory}
-            viewMode={viewMode}
-            onPackageSelect={handlePackageSelect}
-          />
+          {/* Show packages loading if in packages mode and loading */}
+          {viewMode === "packages" && packagesLoading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "200px",
+              }}
+            >
+              <PMLoadingSpinner text="Loading packages..." />
+            </div>
+          ) : (
+            /* Gallery Content with view mode and packages data */
+            <PMGalleryContent
+              activeTab={activeTab}
+              photos={photos}
+              videos={videos}
+              reviews={reviews}
+              selectedCategory={selectedCategory}
+              viewMode={viewMode}
+              packagesData={packagesData}
+              onPackageSelect={handlePackageSelect}
+            />
+          )}
         </div>
       </PMMainHeroSection>
     </div>

@@ -25,6 +25,7 @@ import PhotographerPackagesScreen from "./screens/PhotographerPackagesScreen/Pho
 import ConfirmBookingScreen from "./screens/ConfirmBookingScreen/ConfirmBookingScreen";
 import ScheduleScreen from "./screens/ScheduleScreen/ScheduleScreen";
 import ReviewsScreen from "./screens/ReviewsScreen/ReviewsScreen";
+import CardDetailScreen from "./screens/CardDetailScreen/CardDetailScreen";
 
 const App = () => {
   return (
@@ -156,6 +157,14 @@ const App = () => {
           element={
             <PMProtectedRoute>
               <ScheduleScreen />
+            </PMProtectedRoute>
+          }
+        />
+        <Route
+          path="/card-detail"
+          element={
+            <PMProtectedRoute>
+              <CardDetailScreen />
             </PMProtectedRoute>
           }
         />

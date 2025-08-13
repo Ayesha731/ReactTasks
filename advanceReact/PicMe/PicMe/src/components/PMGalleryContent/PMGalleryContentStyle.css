@@ -1,31 +1,57 @@
 .gallery-content {
   margin-top: 20px;
   min-height: 350.28px;
-  max-width: 1125px;
+  width: 100%;
+  max-width: 1126px;
+  margin: 20px auto 0;
+}
+
+/* No Data Container */
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350.28px;
   width: 100%;
 }
 
-/* Photos & Videos Grid */
+.no-data-content {
+  text-align: center;
+  padding: 40px;
+}
+
+.no-data-content h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--black-text);
+  margin-bottom: 12px;
+}
+
+.no-data-content p {
+  font-size: 16px;
+  color: var(--gray-300);
+  margin: 0;
+}
+
+/* FIXED 6x2 grid layout for photos/videos - NO responsive changes */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 150px);
   gap: 15px;
   width: 100%;
-  justify-content: center; /* Center the grid if there’s extra space */
+  height: 320px; /* Fixed height */
 }
 
 .gallery-grid img,
-.video-card video {
-  width: 166.73px;
-  height: 157.26px;
+.video-card img {
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
-  object-fit: cover; /* Crop to fit without stretching */
+  object-fit: cover;
 }
 
-/* Also ensure video container matches */
 .video-card {
-  width: 166.73px;
-  height: 157.26px;
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -57,22 +83,31 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Reviews Grid */
+.play-icon svg {
+  margin-left: 2px; /* Slight offset to center the play triangle */
+}
+
+/* FIXED 3x2 grid layout for reviews - NO responsive changes */
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 160px);
   gap: 20px;
   width: 100%;
+  height: 340px; /* Fixed height */
 }
 
 .review-card {
-  display: flex;
-  gap: 12px; /* space between avatar and text */
   padding: 16px;
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   background: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
   box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .review-card:hover {
@@ -85,24 +120,18 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0; /* prevent shrinking */
+  flex-shrink: 0;
 }
 
-.review-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* left aligned content */
-}
 .review-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .review-user-info {
   flex: 1;
-  min-width: 0;
+  min-width: 0; /* Allow text to wrap */
 }
 
 .review-user-info h4 {
@@ -115,28 +144,11 @@
   text-overflow: ellipsis;
 }
 
-.review-user-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--black-text);
-  margin: 0;
-}
-
 .review-rating {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 8px;
   margin-top: 4px;
-}
-
-.review-rating .filled {
-  color: var(--yellow);
-}
-
-.review-text {
-  font-size: 13px;
-  color: var(--gray-300);
-  margin-top: 6px;
-  line-height: 1.4;
 }
 
 .review-rating .stars {
@@ -159,14 +171,26 @@
   flex-shrink: 0;
 }
 
-/* Packages Grid */
+.review-text {
+  font-size: 13px;
+  color: var(--gray-300);
+  line-height: 1.4;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  flex: 1;
+}
+
+/* Packages grid for when showing packages */
 .packages-grid {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   gap: 30px;
   flex-wrap: wrap;
-  max-width: 1125px;
+  max-width: 1200px;
   width: 100%;
 }
 
@@ -179,10 +203,11 @@
   transform: translateY(-5px);
 }
 
+/* Card Styling - Updated for uniform color */
 .package-card {
   width: 325px;
   height: 356px;
-  background: linear-gradient(180deg, #47d4a8 0%, #3bc6c0 100%);
+  background: #47d4a8; /* Single uniform color */
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -197,27 +222,51 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* RESPONSIVE BREAKPOINTS */
-@media (max-width: 1024px) {
-  .gallery-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .reviews-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.package-icon {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 22px;
 }
 
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .reviews-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.package-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-align: center;
 }
 
-@media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
+.package-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--secondary-color);
+  text-align: center;
 }
+
+.package-features {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--secondary-color);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.package-btn {
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.package-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Remove all responsive behavior - keep fixed layout */
+/* No media queries to maintain fixed grid sizes */

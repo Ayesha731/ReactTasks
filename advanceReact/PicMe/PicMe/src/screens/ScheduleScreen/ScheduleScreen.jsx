@@ -42,7 +42,7 @@ const ScheduleScreen = () => {
                   bookingTo={bookingTo}
                   onDateChange={handleDateChange}
                 />
-                <NavLink to={"/confirm"} className={"nav-link"}>
+                <NavLink to={"/card-detail"} className={"nav-link"}>
                   <PMButton
                     varient="fill"
                     onClick={() => console.log({ bookingFrom, bookingTo })}

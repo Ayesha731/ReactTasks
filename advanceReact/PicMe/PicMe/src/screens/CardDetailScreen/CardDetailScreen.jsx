@@ -9,6 +9,7 @@ import PMInput from "../../components/PMInput/PMInput";
 import PMCustomerCard from "../../components/PMCustomerCard/PMCustomerCard";
 import PMButton from "../../components/PMButton/PMButton";
 import Calender from "../../assets/icons/CalenderIcon"; // make sure path is correct
+import { NavLink } from "react-router-dom";
 
 const CardDetailScreen = () => {
   const formik = useFormik({
@@ -69,7 +70,7 @@ const CardDetailScreen = () => {
                   />
                   <PMInput
                     placeholder="Expiry Date (MM/YY)"
-                    type="text"
+                    type="date"
                     name="expiry"
                     value={formik.values.expiry}
                     onChange={formik.handleChange}
@@ -89,10 +90,11 @@ const CardDetailScreen = () => {
                     touched={formik.touched.csv}
                   />
                 </div>
-
-                <PMButton varient="fill" type="submit">
-                  <span className="btn-text">Continue</span>
-                </PMButton>
+                <NavLink to={"/confirm"} className={"nav-link"}>
+                  <PMButton varient="fill" type="submit">
+                    <span className="btn-text">Continue</span>
+                  </PMButton>
+                </NavLink>
               </form>
             </PMCustomerCard>
           </div>

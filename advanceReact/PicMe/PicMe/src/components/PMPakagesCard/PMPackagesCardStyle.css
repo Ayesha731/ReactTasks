@@ -11,12 +11,9 @@
   padding: 40px 30px 30px;
   position: relative;
   box-sizing: border-box;
-  /* transition: transform 0.2s ease-in-out; */
+  /* Uniform color for all packages */
+  background: #47d4a8;
 }
-
-/* .card-wrapper:hover {
-  transform: translateY(-5px);
-} */
 
 .card-icon {
   position: absolute;
@@ -92,6 +89,8 @@
   height: 356px;
   padding: 20px;
   border-radius: 12px;
+  /* Uniform color for compact cards too */
+  background: #47d4a8;
 }
 
 .card-wrapper.compact-card .card-text {
