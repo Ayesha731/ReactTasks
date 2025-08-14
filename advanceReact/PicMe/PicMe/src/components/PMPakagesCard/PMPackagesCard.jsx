@@ -18,14 +18,16 @@ const PMPackagesCard = ({ type, className, packageData }) => {
 
         <div className="card-content">
           <p className="card-text">{packageData.name || "Package"}</p>
-          <h1 className="card-title">${packageData.price || "0"}</h1>
+          <h1 className="card-title">
+            {packageData.price ? `$${packageData.price}` : "$0"}
+          </h1>
         </div>
 
         <div className="points">
           <ul>
             {packageData.description && <li>{packageData.description}</li>}
-            {packageData.duration && (
-              <li>{packageData.duration} days Package</li>
+            {packageData.delivery_days != null && (
+              <li>{packageData.delivery_days} days Package</li>
             )}
             {packageData.photos_count && (
               <li>Up to {packageData.photos_count} Photos</li>
@@ -38,11 +40,13 @@ const PMPackagesCard = ({ type, className, packageData }) => {
 
         {/* Button at Bottom */}
         <div className="card-btn">
-          <PMButton varient="outline">
-            <span className="btn-text" style={{ fontWeight: "bold" }}>
-              SELECT
-            </span>
-          </PMButton>
+          <NavLink to={"/checkout"}>
+            <PMButton varient="outline">
+              <span className="btn-text" style={{ fontWeight: "bold" }}>
+                SELECT
+              </span>
+            </PMButton>
+          </NavLink>
         </div>
       </div>
     );

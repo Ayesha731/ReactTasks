@@ -28,7 +28,7 @@ const PMPhotographerProfile = ({
     if (onPackageClick) {
       onPackageClick();
     } else {
-      navigate(`/photographer/${id}/packages`);
+      navigate(`/packages/${id}`);
     }
   };
 

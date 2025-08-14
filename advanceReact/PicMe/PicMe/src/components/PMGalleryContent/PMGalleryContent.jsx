@@ -3,7 +3,9 @@ import "./PMGalleryContentStyle.css";
 import PMPackagesCard from "../PMPakagesCard/PMPackagesCard";
 import PlayIcon from "../../assets/icons/PlayIcon";
 import PMLoadingSpinner from "../PMLoadingSpinner/PMLoadingSpinner";
+
 import { getApiWithAuth } from "../../api/api";
+import { GET_PHOTOGRAPHER_PACKAGES_URL } from "../../api/apiUrls";
 
 const PMGalleryContent = ({
   activeTab,
@@ -13,40 +15,47 @@ const PMGalleryContent = ({
   selectedCategory,
   viewMode = "portfolio",
   onPackageSelect,
-  photographerId, // Add photographer ID prop
+  photographerId,
 }) => {
   const [playingIndex, setPlayingIndex] = useState(null);
   const [packages, setPackages] = useState([]);
   const [packagesLoading, setPackagesLoading] = useState(false);
 
-  // Fetch packages when viewMode is packages and photographer ID is available
-  useEffect(() => {
-    const fetchPackages = async () => {
-      if (viewMode === "packages" && photographerId) {
-        setPackagesLoading(true);
-        try {
-          const response = await getApiWithAuth(
-            `https://api-dev.thepicmeapp.com/api/v1/packages/${photographerId}`
-          );
+  const fetchPackages = async () => {
+    if (!photographerId) return;
 
-          if (response.success && response.data?.data) {
-            setPackages(response.data.data);
-          } else {
-            setPackages([]);
-          }
-        } catch (error) {
-          console.error("Error fetching packages:", error);
-          setPackages([]);
-        } finally {
-          setPackagesLoading(false);
-        }
+    try {
+      setPackagesLoading(true);
+      const response = await getApiWithAuth(
+        `${GET_PHOTOGRAPHER_PACKAGES_URL}/${photographerId}`
+      );
+
+      console.log("Packagesss data:", response);
+
+      if (response.success && response.data) {
+        // If your API returns a single object, wrap it in an array, otherwise set directly
+        const data = Array.isArray(response.data.data)
+          ? response.data.data
+          : [response.data.data];
+        setPackages(data);
+      } else {
+        setPackages([]);
       }
-    };
+    } catch (error) {
+      console.error("Packages fetch error:", error);
+      setPackages([]);
+    } finally {
+      setPackagesLoading(false);
+    }
+  };
 
-    fetchPackages();
+  // Fetch packages whenever viewMode changes to "packages"
+  useEffect(() => {
+    if (viewMode === "packages" && photographerId) {
+      fetchPackages();
+    }
   }, [viewMode, photographerId]);
 
-  // If packages view, show dynamic packages
   if (viewMode === "packages") {
     return (
       <div className="gallery-content packages-content">
@@ -59,7 +68,17 @@ const PMGalleryContent = ({
                 key={pkg.id || index}
                 onClick={() => onPackageSelect && onPackageSelect(pkg)}
               >
-                <PMPackagesCard packageData={pkg} className="compact-card" />
+                <PMPackagesCard
+                  packageData={{
+                    name: pkg.name,
+                    price: pkg.price,
+                    description: pkg.description,
+                    duration: pkg.delivery_days,
+                    photos_count: pkg.photos_count,
+                    videos_count: pkg.videos_count,
+                  }}
+                  className="compact-card"
+                />
               </div>
             ))}
           </div>

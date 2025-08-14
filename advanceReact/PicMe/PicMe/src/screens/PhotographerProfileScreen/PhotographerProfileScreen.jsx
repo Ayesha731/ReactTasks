@@ -18,14 +18,14 @@ const PhotographerProfileScreen = () => {
   const navigate = useNavigate();
 
   const [photographerData, setPhotographerData] = useState(null);
-  const [packagesData, setPackagesData] = useState([]); // Add packages state
+  const [packagesData, setPackagesData] = useState([]);
   const [activeTab, setActiveTab] = useState("photos");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [categories, setCategories] = useState(["all"]);
   const [loading, setLoading] = useState(true);
   const [packagesLoading, setPackagesLoading] = useState(false); // Separate loading for packages
   const [error, setError] = useState(null);
-  const [viewMode, setViewMode] = useState("packages"); // DEFAULT TO PACKAGES
+  const [viewMode, setViewMode] = useState("profile");
 
   useEffect(() => {
     const fetchPhotographerDetails = async () => {
@@ -73,28 +73,35 @@ const PhotographerProfileScreen = () => {
 
   // Fetch packages when switching to packages view
   const fetchPackages = async () => {
-    if (packagesData.length > 0) return; // Don't fetch again if already loaded
+    if (!photographerData?.id) return;
 
     try {
       setPackagesLoading(true);
-      console.log("Fetching packages for photographer ID:", id);
-
-      const response = await getApiWithAuth(
-        `${GET_PHOTOGRAPHER_PACKAGES_URL}/${id}/packages`
+      console.log(
+        "Fetching packagesss for photographer ID:",
+        photographerData.id
       );
 
-      if (response.success) {
-        console.log("Packages data:", response.data);
-        setPackagesData(response.data.data || response.data || []);
+      // Correct URL
+      const response = await getApiWithAuth(
+        `${GET_PHOTOGRAPHER_PACKAGES_URL}/${photographerData.id}`
+      );
+
+      console.log(" Photographer Packages data:", response);
+
+      if (response.success && response.data) {
+        // Wrap single object in array if backend sends 1 package
+        const data = Array.isArray(response.data.data)
+          ? response.data.data
+          : [response.data.data];
+        setPackagesData(data);
       } else {
-        console.error("Error fetching packages:", response.data);
-        // Don't set error here, just log it and show fallback packages
-        console.log("Using fallback packages due to API error");
+        setPackagesData([]);
+        console.error("No packages found");
       }
     } catch (error) {
       console.error("Packages fetch error:", error);
-      // Don't set error here, just log it and show fallback packages
-      console.log("Using fallback packages due to network error");
+      setPackagesData([]);
     } finally {
       setPackagesLoading(false);
     }
@@ -248,18 +255,8 @@ const PhotographerProfileScreen = () => {
 
           {/* Show packages loading if in packages mode and loading */}
           {viewMode === "packages" && packagesLoading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "200px",
-              }}
-            >
-              <PMLoadingSpinner text="Loading packages..." />
-            </div>
+            <PMLoadingSpinner text="Loading packages..." />
           ) : (
-            /* Gallery Content with view mode and packages data */
             <PMGalleryContent
               activeTab={activeTab}
               photos={photos}
@@ -267,8 +264,9 @@ const PhotographerProfileScreen = () => {
               reviews={reviews}
               selectedCategory={selectedCategory}
               viewMode={viewMode}
-              packagesData={packagesData}
-              onPackageSelect={handlePackageSelect}
+              packages={packagesData}
+              onPackageSelect={(pkg) => console.log("Selected package", pkg)}
+              photographerId={photographerData?.id}
             />
           )}
         </div>
